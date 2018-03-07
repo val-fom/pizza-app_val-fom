@@ -1,0 +1,33 @@
+@media screen and (max-width: 500px) {
+	.header__container {
+		grid-template-columns: repeat(2, 1fr);
+		align-items: center;
+		justify-items: center;
+		padding-bottom: 1rem;
+		:first-child {
+			justify-self: left;
+		}
+		:last-child {
+			justify-self: right;
+		}
+	}
+
+	.header__logo {
+		grid-column: 1 / 3;
+		grid-row: 2 ;
+	}
+
+	.footer__container {
+		grid-template-columns: auto;
+		justify-content: center;
+		.footer__address {
+			justify-self: center;
+			align-self: self-end;
+		}
+		.footer__copyright {
+			justify-self: center;
+			align-self: self-start;
+		}
+	}
+
+}

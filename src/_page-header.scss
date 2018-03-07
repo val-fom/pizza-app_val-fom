@@ -1,0 +1,43 @@
+.header {
+	background: $header-background;
+}
+
+.header__container {
+	max-width: 1170px;
+	padding: 0 1.5rem;
+	margin: auto;
+	min-height: 15rem;
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	grid-gap: 1rem;
+	align-items: center;
+	justify-items: center;
+	:first-child {
+		justify-self: left;
+	}
+	:last-child {
+		justify-self: right;
+	}
+}
+
+.header__time {
+	font-size: 1.2em;
+	color: white;
+	white-space: nowrap;
+	padding: 1rem 1.5rem;
+}
+
+.logo__img {
+	width: 13rem;
+	margin: auto;
+}
+
+.login__button {
+	background: transparent;
+}
+
+.main__button {
+	margin: auto;
+	display: block;
+	background: $color-red;
+}

@@ -1,0 +1,38 @@
+.footer {
+	background: $footer-background;
+	position: absolute;
+	width: 100%;
+	bottom: 0;
+}
+
+.footer__container {
+	max-width: 1170px;
+	padding: 0 1.5rem;
+	margin: auto;
+	height: 15rem;
+
+	display: grid;
+	grid-template-columns: auto auto;
+	grid-gap: 1rem;
+	align-items: center;
+	justify-items: center;
+	:first-child {
+		justify-self: left;
+	}
+	:last-child {
+		justify-self: right;
+	}
+}
+
+.footer__address {
+	a {
+		text-decoration: none;
+		color: inherit;
+		transition: $transition;
+		border-bottom: 1px dashed;
+		white-space: nowrap;
+		&:hover {
+			color: $color-transparent;
+		}
+	}
+}
