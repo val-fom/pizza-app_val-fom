@@ -1,5 +1,5 @@
 @media screen and (max-width: 500px) {
-	.header__container {
+	.header {
 		grid-template-columns: repeat(2, 1fr);
 		align-items: center;
 		justify-items: center;
@@ -17,7 +17,7 @@
 		grid-row: 2 ;
 	}
 
-	.footer__container {
+	.footer {
 		grid-template-columns: auto;
 		justify-content: center;
 		.footer__address {

@@ -1,0 +1,11 @@
+@import "../../scss/variables";
+
+.main__container {
+	padding: 3rem 0;
+}
+
+.main__button {
+	margin: auto;
+	display: block;
+	background: $color-red;
+}

@@ -9,8 +9,7 @@ var inProduction = (process.env.NODE_ENV === 'production');
 module.exports = {
 	entry: {
 		app: [
-			'./src/main.js',
-			'./src/main.scss'
+			'./index.js'
 		]
 	},
 	output: {
@@ -55,7 +54,7 @@ module.exports = {
 			minimize: inProduction
 		}),
 		new HtmlWebpackPlugin({
-			template: 'src/index.html'
+			template: './index.html'
 		}),
 		new CopyWebpackPlugin([{
 			from: 'assets',

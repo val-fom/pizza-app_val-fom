@@ -1,8 +1,10 @@
-.header {
+@import "../../scss/variables";
+
+.header__container {
 	background: $header-background;
 }
 
-.header__container {
+.header {
 	max-width: 1170px;
 	padding: 0 1.5rem;
 	margin: auto;
@@ -34,10 +36,4 @@
 
 .login__button {
 	background: transparent;
-}
-
-.main__button {
-	margin: auto;
-	display: block;
-	background: $color-red;
 }

@@ -1,6 +1,4 @@
-'use strict';
-
-function getTime() {
+export const getTime = () => {
 	const now = new Date();
 	const ss = now.getSeconds().toString().padStart(2, '0');
 	const mm = now.getMinutes().toString().padStart(2, '0');
@@ -8,10 +6,3 @@ function getTime() {
 
 	return `${hh}:${mm}:${ss}`;
 }
-
-const clock = document.querySelector('#current-time');
-
-setInterval( () => {
-	clock.innerHTML = getTime();
-}, 1000);
-

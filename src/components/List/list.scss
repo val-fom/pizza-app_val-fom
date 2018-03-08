@@ -1,8 +1,6 @@
-.main {
-	padding: 3rem 0;
-}
+@import "../../scss/variables";
 
-.main__container {
+.list__container {
 	max-width: 1170px;
 	padding: 3rem 1.5rem;
 	margin: auto;
@@ -13,7 +11,7 @@
 	grid-gap: 1rem;
 }
 
-.main__item {
+.list__item {
 	display: grid;
 	grid-template-columns: 1fr 1fr;
 	grid-gap: 1rem 0;
@@ -38,4 +36,10 @@
 
 .item__price {
 	font-weight: bold;
+}
+
+.list__button {
+	margin: auto;
+	display: block;
+	background: $color-red;
 }
