@@ -1,5 +1,7 @@
-import App from './src/App';
+import routes from './src/routes';
+import Router from './src/framework/Router';
 
-const app = new App({host: document.getElementById('root')});
+const router = new Router(routes);
 
-app.update();
+const root = document.getElementById('root');
+root.appendChild(router.host);

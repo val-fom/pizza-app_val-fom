@@ -1,29 +1,26 @@
-import './scss/main.scss';
+// import './scss/login.scss';
 
 import { Component } from './framework';
 
 import Header from './components/Header';
-import Main from './components/Main';
+import LoginForm from './components/LoginForm';
 import Footer from './components/Footer';
 
-export default class App extends Component {
+export default class Login extends Component {
 	constructor() {
 		super();
-
-		this.state = {
-		}
 
 		this.host = document.createElement('div');
 
 		this.header = new Header();
-		this.main = new Main();
+		this.loginForm = new LoginForm();
 		this.footer = new Footer();
 	}
 
 	render() {
 		return [
 			this.header.update(),
-			this.main.update(),
+			this.loginForm.update(),
 			this.footer.update(),
 		];
 	}
