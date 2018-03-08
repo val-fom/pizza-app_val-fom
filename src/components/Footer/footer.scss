@@ -39,4 +39,17 @@
 	}
 }
 
-@import "../../scss/media-queries";
+@media screen and (max-width: 500px) {
+	.footer {
+		grid-template-columns: auto;
+		justify-content: center;
+		:first-child {
+			justify-self: center;
+			align-self: self-end;
+		}
+		:last-child {
+			justify-self: center;
+			align-self: self-start;
+		}
+	}
+}
