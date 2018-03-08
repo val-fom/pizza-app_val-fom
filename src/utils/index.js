@@ -13,3 +13,19 @@ export const parseHTML = html => {
 
 	return template.content;
 };
+
+export const insertChildren = (parent, children) => {
+	if (typeof children === 'string') {
+		parent.insertAdjacentHTML('beforeend', children);
+	} else if (Array.isArray(children)) {
+		children.forEach(child => {
+			(typeof child === 'string') ?
+				parent.insertAdjacentHTML('beforeend', child):
+				parent.append(child);
+		});
+	} else {
+		parent.append(children);
+	}
+
+	return parent;
+}

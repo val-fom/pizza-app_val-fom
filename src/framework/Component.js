@@ -1,3 +1,5 @@
+import { insertChildren } from '../utils';
+
 class Component {
 	constructor(props) {
 		this.props = props || {};
@@ -31,21 +33,7 @@ class Component {
 		const children = this.render();
 		this.host.innerHTML = '';
 
-		if (typeof children === 'string') {
-			this.host.innerHTML = children;
-		} else if (Array.isArray(children)) {
-			children.forEach(child => {
-				if (typeof child === 'string') {
-					this.host.insertAdjacentHTML('beforeend', child);
-				} else {
-					this.host.append(child);
-				}
-			});
-		} else {
-			this.host.append(children);
-		}
-
-		return this.host;
+		return insertChildren(this.host, children);
 	}
 
 	render() {}
