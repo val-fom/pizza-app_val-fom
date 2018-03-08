@@ -10,17 +10,12 @@ export default class Main extends Component {
 		this.host = document.createElement('main');
 		this.host.classList.add('main__container');
 
-		this.addButton = document.createElement('button');
-		this.addButton.classList.add('list__button', 'button');
-		this.addButton.addEventListener('click', () => {});
-		this.addButton.textContent = '+ Add new pizza';
-
 		this.list = new List();
 	}
 
 	render() {
 		return [
-			this.addButton,
+			'<button class="button main__button">+ Add new pizza</button>',
 			this.list.update(),
 		];
 	}

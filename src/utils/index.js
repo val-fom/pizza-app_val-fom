@@ -6,3 +6,10 @@ export const getTime = () => {
 
 	return `${hh}:${mm}:${ss}`;
 }
+
+export const parseHTML = html => {
+	const template = document.createElement('template');
+	template.innerHTML = html.trim();
+
+	return template.content;
+};

@@ -18,10 +18,10 @@
 	grid-gap: 1rem;
 	align-items: center;
 	justify-items: center;
-	:first-child {
+	> :first-child {
 		justify-self: left;
 	}
-	:last-child {
+	> :last-child {
 		justify-self: right;
 	}
 }
@@ -43,11 +43,11 @@
 	.footer {
 		grid-template-columns: auto;
 		justify-content: center;
-		:first-child {
+		> :first-child {
 			justify-self: center;
 			align-self: self-end;
 		}
-		:last-child {
+		> :last-child {
 			justify-self: center;
 			align-self: self-start;
 		}
