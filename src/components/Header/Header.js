@@ -20,16 +20,16 @@ export default class Header extends Component {
 				<div class="header__time" id="time">
 				</div>
 				<div class="header__logo">
-					<a href="#">
+					<a href="#/">
 						<img class="logo__img" src="img/pizza-logo.png"
 							alt="Pizza app logo">
 					</a>
 				</div>
 				<div class="header__login">
-					<button type="button" class="button login__button">
+					<a href="#/login" class="button login__button">
 						<i class="fa fa-sign-in"></i>
 						Login/Signup
-					</button>
+					</a>
 				</div>
 			</header>
 		`;

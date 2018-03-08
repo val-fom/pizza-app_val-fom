@@ -15,7 +15,7 @@ export default class Router extends Component {
 
 		window.addEventListener('hashchange', () => {
 			this.handleUrlChange(this.path);
-		})
+		});
 
 		this.handleUrlChange(this.path);
 	}

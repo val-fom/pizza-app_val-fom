@@ -48,3 +48,7 @@ a:focus {
 		outline-color: $color-red;
 	}
 }
+
+a:link, a:visited, a:active {
+	text-decoration: none;
+}
