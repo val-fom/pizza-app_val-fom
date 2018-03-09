@@ -34,9 +34,11 @@ a:focus {
 	color: #fff;
 	font-size: 1.6rem;
 	white-space: nowrap;
+	text-align: center;
 	transition: translform 0.1s,
 							box-shadow $transition;
 	cursor: pointer;
+	line-height: normal;
 	&:hover {
 		box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2),
 								0 6px 20px 0 rgba(0,0,0,0.19);
