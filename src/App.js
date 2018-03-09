@@ -14,6 +14,7 @@ export default class App extends Component {
 		}
 
 		this.host = document.createElement('div');
+		this.host.classList.add('app__container');
 
 		this.header = new Header();
 		this.main = new Main();

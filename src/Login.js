@@ -11,6 +11,7 @@ export default class Login extends Component {
 		super();
 
 		this.host = document.createElement('div');
+		this.host.classList.add('login__container');
 
 		this.header = new Header();
 		this.loginForm = new LoginForm();
