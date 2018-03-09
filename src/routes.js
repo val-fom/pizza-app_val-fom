@@ -1,5 +1,6 @@
 import App from './App';
 import Login from './Login';
+import Register from './Register';
 
 export default [
 	{
@@ -9,5 +10,9 @@ export default [
 	{
 		href: '/login',
 		Component: Login,
+	},
+	{
+		href: '/register',
+		Component: Register,
 	},
 ];

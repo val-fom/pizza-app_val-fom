@@ -13,8 +13,8 @@ export default class LoginForm extends Component {
 	render() {
 		return `
 <form class="login-form" method="post">
-	<label for="name">Login:</label>
-	<input type="text" class="login-form__name" name="login" id="login" required>
+	<label for="username">Username:</label>
+	<input type="text" class="login-form__name" name="username" id="username" required>
 	<label for="password">Password:</label>
 	<input type="password" class="login-form__password" name="password"
 		id="password" required>
