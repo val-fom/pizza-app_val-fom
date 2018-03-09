@@ -6,6 +6,13 @@ export default [
 	{
 		href: '/',
 		Component: App,
+		// redirectTo: '/login',
+		onEnter: () => {
+			if (!!'auth check') {
+				console.log(this);
+				// navigateTo(this.redirectTo);
+			}
+		},
 	},
 	{
 		href: '/login',
