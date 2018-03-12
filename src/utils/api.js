@@ -13,6 +13,6 @@ export const getStoreList = () => {
 			if (res.ok) {
 				return res.json();
 			};
-			throw new Error(res.statusText);
+			throw new Error(res.error);
 		})
 }
