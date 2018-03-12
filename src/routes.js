@@ -4,15 +4,18 @@ import Register from './Register';
 
 export default [
 	{
+		href: '',
+		redirectTo: '/',
+	},
+	{
 		href: '/',
 		Component: App,
-		// redirectTo: '/login',
-		onEnter: () => {
-			if (!!'auth check') {
-				console.log(this);
-				// navigateTo(this.redirectTo);
-			}
-		},
+		// onEnter: () => {
+		// 	if (!!'auth check') {
+		// 		console.log(this);
+		// 		// navigateTo(this.redirectTo);
+		// 	}
+		// },
 	},
 	{
 		href: '/login',
