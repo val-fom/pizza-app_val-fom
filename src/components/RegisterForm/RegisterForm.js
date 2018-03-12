@@ -47,6 +47,9 @@ export default class RegisterForm extends Component {
 		id="store-select" required>
 		${options}
 	</select>
+	<label for="store-password">Store password:</label>
+	<input type="password" class="register-form__store-password" name="store-password"
+		id="store-password" required>
 	<input type="submit" class="button register-form__button button--register"
 		value="Sign up">
 </form>
