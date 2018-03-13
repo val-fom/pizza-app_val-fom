@@ -1,6 +1,8 @@
 import './login-form.scss';
 
 import { Component } from '../../framework';
+import { AUTH_SERVICE } from '../../auth/auth-login-service';
+import { errorHandler } from '../../utils/';
 
 export default class LoginForm extends Component {
 	constructor() {
@@ -8,9 +10,31 @@ export default class LoginForm extends Component {
 
 		this.host = document.createElement('div');
 		this.host.classList.add('login-form__container');
+
+		this.host.addEventListener('submit', ev => this.handleSubmit(ev))
+	}
+
+	handleSubmit(ev) {
+		ev.preventDefault();
+		const userData = {
+			username: ev.target.username.value,
+			password: ev.target.password.value,
+		};
+
+		AUTH_SERVICE.login(userData)
+			.then(res => {
+				if (res.success) {
+					// redirect to '/user_info'
+				} else {
+					errorHandler(res);
+				}
+			})
+			.catch(console.error);
 	}
 
 	render() {
+		const { errorMessage } = this.state;
+
 		return `
 <form class="login-form" method="post">
 	<label for="username">Username:</label>

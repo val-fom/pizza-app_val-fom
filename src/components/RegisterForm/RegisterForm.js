@@ -1,7 +1,8 @@
 import './register-form.scss';
 
 import { Component } from '../../framework';
-import * as api from '../../utils/api';
+import { getStoreList, createUser } from '../../utils/api';
+import { errorHandler } from '../../utils/';
 
 export default class RegisterForm extends Component {
 	constructor() {
@@ -14,13 +15,36 @@ export default class RegisterForm extends Component {
 		this.host = document.createElement('div');
 		this.host.classList.add('login-form__container');
 
+		this.host.addEventListener('submit', ev => this.handleSubmit(ev));
 
 		this.getStores();
 	}
 
 	getStores() {
-		return api.getStoreList()
+		return getStoreList()
 			.then(stores => this.updateState({ stores }));
+	}
+
+	handleSubmit(ev) {
+		ev.preventDefault();
+		const userData = {
+			username: ev.target.username.value,
+			password: ev.target.password.value,
+			password_repeat: ev.target.password_repeat.value,
+			email: ev.target.email.value,
+			store_id: +ev.target.store_id.value,
+			store_password: ev.target.store_password.value,
+		};
+
+		return createUser(userData)
+			.then(res => {
+				if (res.success) {
+					// redirect to '/login'
+				} else {
+					errorHandler(res);
+				}
+			})
+			.catch(console.error);
 	}
 
 	render() {
@@ -39,17 +63,17 @@ export default class RegisterForm extends Component {
 	<label for="password">Password:</label>
 	<input type="password" class="register-form__password" name="password"
 		id="password" required>
-	<label for="password-confirm">Confirm password:</label>
-	<input type="password" class="register-form__password" name="password-confirm"
-		id="password-confirm" required>
-	<label for="store-select">Choose your store:</label>
-	<select class="register-form__store" name="store-select"
-		id="store-select" required>
+	<label for="password_repeat">Confirm password:</label>
+	<input type="password" class="register-form__password" name="password_repeat"
+		id="password_repeat" required>
+	<label for="store_id">Choose your store:</label>
+	<select class="register-form__store_id" name="store_id"
+		id="store_id" required>
 		${options}
 	</select>
-	<label for="store-password">Store password:</label>
-	<input type="password" class="register-form__store-password" name="store-password"
-		id="store-password" required>
+	<label for="store_password">Store password:</label>
+	<input type="password" class="register-form__store_password" name="store_password"
+		id="store_password" required>
 	<input type="submit" class="button register-form__button button--register"
 		value="Sign up">
 </form>

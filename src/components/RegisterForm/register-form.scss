@@ -13,8 +13,8 @@
 .register-form__name,
 .register-form__password,
 .register-form__email,
-.register-form__store,
-.register-form__store-password {
+.register-form__store_id,
+.register-form__store_password {
 	font-size: 1.6rem;
 	padding: 0.6em;
 	margin: 0.2rem 0 1.6rem;
@@ -22,7 +22,7 @@
 	border-radius: 5px;
 }
 
-.register-form__store {
+.register-form__store_id {
 	height: 3.8rem;
 }
 

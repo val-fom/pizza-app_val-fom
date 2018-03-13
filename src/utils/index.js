@@ -20,7 +20,7 @@ export const insertChildren = (parent, children) => {
 	} else if (Array.isArray(children)) {
 		children.forEach(child => {
 			(typeof child === 'string') ?
-				parent.insertAdjacentHTML('beforeend', child):
+			parent.insertAdjacentHTML('beforeend', child):
 				parent.append(child);
 		});
 	} else {
@@ -29,3 +29,18 @@ export const insertChildren = (parent, children) => {
 
 	return parent;
 }
+
+export const status = res => {
+	if (res.ok || res.status === 400) return res;
+	throw new Error(res.statusText);
+}
+
+export const json = res => res.json();
+
+export const errorHandler = res => {
+	if (res.validations) {
+		throw new Error(res.error + ':\n' + res.validations.join('\n'));
+	} else {
+		throw new Error(res.error);
+	}
+};

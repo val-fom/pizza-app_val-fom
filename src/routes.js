@@ -10,6 +10,7 @@ export default [
 	{
 		href: '/',
 		Component: App,
+		authRequired: true,
 		// onEnter: () => {
 		// 	if (!!'auth check') {
 		// 		console.log(this);
@@ -20,9 +21,11 @@ export default [
 	{
 		href: '/login',
 		Component: Login,
+		authRequired: false,
 	},
 	{
 		href: '/register',
 		Component: Register,
+		authRequired: false,
 	},
 ];
