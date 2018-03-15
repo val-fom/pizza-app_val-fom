@@ -24,9 +24,9 @@ class AuthService {
 
 	// }
 
-	// isAuthorized() {
-
-	// }
+	isAuthorized() {
+		return !!this.token;
+	}
 
 	// tokenIsNotExpired() {
 
