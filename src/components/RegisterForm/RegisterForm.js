@@ -51,8 +51,10 @@ export default class RegisterForm extends Component {
 		const { stores } = this.state;
 
 		const options = stores.map(store => {
-			return `<option value="${store.id}">${store.name}</option>`;
-		}).join();
+			let selected = '';
+			if (store.id == 2) selected = 'selected';
+			return `<option value="${store.id}" ${selected}>${store.name}</option>`;
+		}).join('');
 
 		return `
 <form class="register-form" method="post">
