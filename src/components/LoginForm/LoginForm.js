@@ -9,10 +9,6 @@ export default class LoginForm extends Component {
 	constructor() {
 		super();
 
-		this.state = {
-			response: null,
-		}
-
 		this.host = document.createElement('div');
 		this.host.classList.add('login-form__container');
 
@@ -31,7 +27,7 @@ export default class LoginForm extends Component {
 		AUTH_SERVICE.login(userData)
 			.then(response => {
 				if (response.success) {
-					this.updateState({ response });
+					this.message.update({ response });
 					// redirect to '/user'
 					setTimeout(() => {
 						window.location.hash = '/user';
@@ -39,15 +35,13 @@ export default class LoginForm extends Component {
 					// TODO: employ callback here. Like so:
 					// this.props.onSuccess();
 				} else {
-					this.updateState({ response });
+					this.message.update({ response });
 				}
 			})
 			.catch(console.error);
 	}
 
 	render() {
-		const { response } = this.state;
-
 		const form = `
 <form class="login-form" method="post">
 	<label for="username">Username:</label>
@@ -65,11 +59,9 @@ export default class LoginForm extends Component {
 </form>
 		`;
 
-		if (!response) return form;
-
 		return [
 			form,
-			this.message.update(response),
+			this.message.update(),
 		];
 	}
 }

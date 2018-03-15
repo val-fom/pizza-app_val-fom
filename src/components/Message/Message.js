@@ -10,7 +10,9 @@ export default class Message extends Component {
 	}
 
 	render() {
-		const { success, error, validations } = this.props;
+		if (!this.props) return '';
+
+		const { success, error, validations } = this.props.response;
 
 		if (success) {
 			return `<p class="message--success">Login success! Redirecting...</p>`;

@@ -3,7 +3,6 @@ import './register-form.scss';
 import { parseHTML } from '../../utils';
 import { Component } from '../../framework';
 import { getStoreList, createUser } from '../../utils/api';
-// import { errorHandler } from '../../utils/';
 import Message from '../Message';
 
 export default class RegisterForm extends Component {
@@ -12,7 +11,6 @@ export default class RegisterForm extends Component {
 
 		this.state = {
 			stores: [],
-			response: null,
 		}
 
 		this.host = document.createElement('div');
@@ -44,7 +42,7 @@ export default class RegisterForm extends Component {
 		return createUser(userData)
 			.then(response => {
 				if (response.success) {
-					this.updateState({ response });
+					this.message.update({ response });
 					// redirect to '/login'
 					setTimeout(() => {
 						window.location.hash = '/login';
@@ -52,15 +50,14 @@ export default class RegisterForm extends Component {
 					// TODO: employ callback here. Like so:
 					// this.props.onSuccess();
 				} else {
-					// errorHandler(response);
-					this.updateState({ response });
+					this.message.update({ response });
 				}
 			})
 			.catch(console.error);
 	}
 
 	render() {
-		const { stores, response } = this.state;
+		const { stores } = this.state;
 
 		const options = stores.map(store => {
 			let selected = '';
@@ -93,11 +90,9 @@ export default class RegisterForm extends Component {
 </form>
 		`;
 
-		if (!response) return form;
-
 		return [
 			form,
-			this.message.update(response),
+			this.message.update(),
 		];
 	}
 }
