@@ -1,0 +1,21 @@
+@import "../../scss/variables";
+
+.message__container {
+		max-width: 300px;
+		margin: 3rem auto;
+}
+
+.message--success {
+	color: $color-green;
+}
+
+.message--error,
+.message__validations {
+	color: $color-red;
+}
+
+.message__validations {
+	list-style-type: disc;
+	margin-left: 2rem;
+}
+

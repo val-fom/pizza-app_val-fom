@@ -34,9 +34,14 @@ class AuthService {
 
 	login(userData) {
 		return loginUser(userData)
-			.then(res => {
-				if (res.success) this.token = res.token;
-				return res;
+			.then(response => {
+				const { success, token } = response;
+				if (success) {
+					this.token = token;
+					return { success };
+					// ^ incapsulating token in login service
+				}
+				return response;
 			});
 	}
 }

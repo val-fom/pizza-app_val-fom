@@ -1,6 +1,7 @@
 import App from './App';
 import Login from './Login';
 import Register from './Register';
+import User from './User';
 
 export default [
 	{
@@ -28,4 +29,9 @@ export default [
 		Component: Register,
 		authRequired: false,
 	},
+	{
+		href: '/user',
+		Component: User,
+		authRequired: true,
+	}
 ];
