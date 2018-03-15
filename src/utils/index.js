@@ -32,6 +32,7 @@ export const insertChildren = (parent, children) => {
 
 export const status = res => {
 	if (res.ok || res.status === 400) return res;
+	console.log(res);
 	throw new Error(res.statusText);
 }
 

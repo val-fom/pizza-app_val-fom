@@ -1,8 +1,10 @@
 import './register-form.scss';
 
+import { parseHTML } from '../../utils';
 import { Component } from '../../framework';
 import { getStoreList, createUser } from '../../utils/api';
-import { errorHandler } from '../../utils/';
+// import { errorHandler } from '../../utils/';
+import Message from '../Message';
 
 export default class RegisterForm extends Component {
 	constructor() {
@@ -10,12 +12,15 @@ export default class RegisterForm extends Component {
 
 		this.state = {
 			stores: [],
+			response: null,
 		}
 
 		this.host = document.createElement('div');
 		this.host.classList.add('login-form__container');
 
 		this.host.addEventListener('submit', ev => this.handleSubmit(ev));
+
+		this.message = new Message();
 
 		this.getStores();
 	}
@@ -37,18 +42,25 @@ export default class RegisterForm extends Component {
 		};
 
 		return createUser(userData)
-			.then(res => {
-				if (res.success) {
+			.then(response => {
+				if (response.success) {
+					this.updateState({ response });
 					// redirect to '/login'
+					setTimeout(() => {
+						window.location.hash = '/login';
+					}, 1000);
+					// TODO: employ callback here. Like so:
+					// this.props.onSuccess();
 				} else {
-					errorHandler(res);
+					// errorHandler(response);
+					this.updateState({ response });
 				}
 			})
 			.catch(console.error);
 	}
 
 	render() {
-		const { stores } = this.state;
+		const { stores, response } = this.state;
 
 		const options = stores.map(store => {
 			let selected = '';
@@ -56,7 +68,7 @@ export default class RegisterForm extends Component {
 			return `<option value="${store.id}" ${selected}>${store.name}</option>`;
 		}).join('');
 
-		return `
+		const html = `
 <form class="register-form" method="post">
 	<label for="username">Username:</label>
 	<input type="text" class="register-form__name" name="username" id="username" required>
@@ -80,5 +92,13 @@ export default class RegisterForm extends Component {
 		value="Sign up">
 </form>
 		`;
+
+		const fragment = parseHTML(html);
+
+		if (response) {
+			fragment.append(this.message.update(response));
+		}
+
+		return fragment;
 	}
 }
