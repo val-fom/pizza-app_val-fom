@@ -68,7 +68,7 @@ export default class RegisterForm extends Component {
 			return `<option value="${store.id}" ${selected}>${store.name}</option>`;
 		}).join('');
 
-		const html = `
+		const form = `
 <form class="register-form" method="post">
 	<label for="username">Username:</label>
 	<input type="text" class="register-form__name" name="username" id="username" required>
@@ -93,12 +93,11 @@ export default class RegisterForm extends Component {
 </form>
 		`;
 
-		const fragment = parseHTML(html);
+		if (!response) return form;
 
-		if (response) {
-			fragment.append(this.message.update(response));
-		}
-
-		return fragment;
+		return [
+			form,
+			this.message.update(response),
+		];
 	}
 }

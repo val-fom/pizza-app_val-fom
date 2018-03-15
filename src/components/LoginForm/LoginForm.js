@@ -48,7 +48,7 @@ export default class LoginForm extends Component {
 	render() {
 		const { response } = this.state;
 
-		const html = `
+		const form = `
 <form class="login-form" method="post">
 	<label for="username">Username:</label>
 	<input type="text" class="login-form__name" name="username" id="username" required>
@@ -64,12 +64,12 @@ export default class LoginForm extends Component {
 	</div>
 </form>
 		`;
-		const fragment = parseHTML(html);
 
-		if (response) {
-			fragment.append(this.message.update(response));
-		}
+		if (!response) return form;
 
-		return fragment;
+		return [
+			form,
+			this.message.update(response),
+		];
 	}
 }
