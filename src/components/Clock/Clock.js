@@ -6,7 +6,7 @@ export default class Clock extends Component {
 	constructor() {
 		super();
 		this.state = {
-			currentTime: '00:00:00',
+			currentTime: getTime(),
 		}
 
 		this.host = document.createElement('div');

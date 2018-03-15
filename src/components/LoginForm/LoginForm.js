@@ -1,6 +1,9 @@
 import './login-form.scss';
 
+import { parseHTML } from '../../utils';
 import { Component } from '../../framework';
+import { AUTH_SERVICE } from '../../auth/auth-login-service';
+import Message from '../Message';
 
 export default class LoginForm extends Component {
 	constructor() {
@@ -8,10 +11,38 @@ export default class LoginForm extends Component {
 
 		this.host = document.createElement('div');
 		this.host.classList.add('login-form__container');
+
+		this.host.addEventListener('submit', ev => this.handleSubmit(ev))
+
+		this.message = new Message();
+	}
+
+	handleSubmit(ev) {
+		ev.preventDefault();
+		const userData = {
+			username: ev.target.username.value,
+			password: ev.target.password.value,
+		};
+
+		AUTH_SERVICE.login(userData)
+			.then(response => {
+				if (response.success) {
+					this.message.update({ response });
+					// redirect to '/user'
+					setTimeout(() => {
+						window.location.hash = '/user';
+					}, 1000);
+					// TODO: employ callback here. Like so:
+					// this.props.onSuccess();
+				} else {
+					this.message.update({ response });
+				}
+			})
+			.catch(console.error);
 	}
 
 	render() {
-		return `
+		const form = `
 <form class="login-form" method="post">
 	<label for="username">Username:</label>
 	<input type="text" class="login-form__name" name="username" id="username" required>
@@ -27,5 +58,10 @@ export default class LoginForm extends Component {
 	</div>
 </form>
 		`;
+
+		return [
+			form,
+			this.message.update(),
+		];
 	}
 }
