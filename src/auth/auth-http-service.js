@@ -19,7 +19,6 @@ class AuthHttpService {
 		})
 		.then(status)
 		.then(json)
-		.then(console.log);
 	}
 
 	post() {
