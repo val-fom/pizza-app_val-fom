@@ -34,6 +34,13 @@ class AuthService {
 
 	// }
 
+	clearToken() {
+		this._token = null;
+		localStorage.removeItem('token');
+		// this._claims = null;
+		// localStorage.removeItem('claims');
+	}
+
 	login(userData) {
 		return loginUser(userData)
 			.then(response => {

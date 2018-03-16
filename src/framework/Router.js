@@ -58,8 +58,7 @@ export default class Router extends Component {
 	handleOnEnter(nextRoute, url) {
 		// TODO: parse params using url and nextRout.href
 
-		nextRoute.onEnter(/*params, */this.handleRedirect,
-			nextRoute, this.applyRoute);
+		nextRoute.onEnter(/*params, */this.handleRedirect, nextRoute);
 	}
 
 	applyRoute(route, url) {
