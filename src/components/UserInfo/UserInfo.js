@@ -15,7 +15,8 @@ export default class UserInfo extends Component {
 	}
 
 	handleLogout(ev) {
-		if (ev.target.dataset.action = 'logout') {
+		console.log(ev.target);
+		if (ev.target.dataset.action === 'logout') {
 			AUTH_SERVICE.clearToken();
 		};
 	}
