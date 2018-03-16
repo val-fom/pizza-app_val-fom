@@ -26,7 +26,7 @@ export default class Header extends Component {
 					</a>
 				</div>
 				<div class="header__login">
-					<a href="#/login" class="button login__button">
+					<a href="#/user" class="button login__button">
 						<i class="fa fa-sign-in"></i>
 						Login/Signup
 					</a>

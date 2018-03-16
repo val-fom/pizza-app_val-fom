@@ -17,6 +17,9 @@ export default class Router extends Component {
 			this.handleUrlChange(this.path);
 		});
 
+		this.handleRedirect = this.handleRedirect.bind(this);
+		this.applyRoute = this.applyRoute.bind(this);
+
 		this.handleUrlChange(this.path);
 	}
 
@@ -28,7 +31,7 @@ export default class Router extends Component {
 		const { routes } = this.state;
 		const nextRoute = routes.find(({ href }) => href === url);
 
-		if (!!nextRoute.redirectTo) {
+		if (!!nextRoute.redirectTo && !nextRoute.onEnter) {
 			return this.handleRedirect(nextRoute.redirectTo);
 		}
 
@@ -48,8 +51,11 @@ export default class Router extends Component {
 		window.location.hash = url;
 	}
 
-	handleOnEnter(nextRoute) {
-		nextRoute.onEnter();
+	handleOnEnter(nextRoute, url) {
+		// TODO: parse params using url and nextRout.href
+
+		nextRoute.onEnter(/*params, */this.handleRedirect,
+			nextRoute, this.applyRoute);
 	}
 
 	applyRoute(route, url) {
