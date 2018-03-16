@@ -5,6 +5,8 @@ class AuthService {
 	constructor() {
 		this._token = localStorage.getItem('token') || null;
 		this._claims = null;
+
+		this.isAuthorized = this.isAuthorized.bind(this);
 	}
 
 	set token(token) {

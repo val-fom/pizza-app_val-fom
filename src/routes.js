@@ -13,12 +13,7 @@ export default [
 	{
 		href: '/',
 		Component: App,
-		// onEnter: () => {
-		// 	if (!!'auth check') {
-		// 		console.log(this);
-		// 		// navigateTo(this.redirectTo);
-		// 	}
-		// },
+		canActivate: AUTH_SERVICE.isAuthorized,
 	},
 	{
 		href: '/login',
@@ -31,18 +26,6 @@ export default [
 	{
 		href: '/user',
 		Component: User,
-		onEnter: (/*params, */handleRedirect, nextRoute, applyRoute) => {
-			if (!AUTH_SERVICE.isAuthorized()) {
-				handleRedirect(nextRoute.redirectTo);
-				console.log('is not authorized');
-			} else {
-				applyRoute(nextRoute, nextRoute.href);
-				console.log('is authorized');
-			}
-
-			// TODO: move this to guard service
-
-		},
-		redirectTo: '/login',
-	}
+		canActivate: AUTH_SERVICE.isAuthorized,
+	},
 ];

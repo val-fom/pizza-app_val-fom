@@ -31,8 +31,12 @@ export default class Router extends Component {
 		const { routes } = this.state;
 		const nextRoute = routes.find(({ href }) => href === url);
 
-		if (!!nextRoute.redirectTo && !nextRoute.onEnter) {
+		if (!!nextRoute.redirectTo) {
 			return this.handleRedirect(nextRoute.redirectTo);
+		}
+
+		if (!!nextRoute.canActivate && !nextRoute.canActivate()) {
+			return this.navigateTo('/login');
 		}
 
 		if (!!nextRoute.onEnter) {
