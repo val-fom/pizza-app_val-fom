@@ -21,7 +21,7 @@ export const loginUser = userData => {
 	return fetch(BASE_API_URL + END_POINTS.userLogin, {
 			method: 'POST',
 			body: JSON.stringify(userData),
-			// headers: new Headers({'content-type': 'application/json'}),
+			headers: new Headers({'content-type': 'application/json'}),
 		})
 		.then(status)
 		.then(json);
@@ -31,7 +31,7 @@ export const createUser = userData => {
 	return fetch(BASE_API_URL + END_POINTS.userCreate, {
 			method: 'POST',
 			body: JSON.stringify(userData),
-			// headers: new Headers({'content-type': 'application/json'}),
+			headers: new Headers({'content-type': 'application/json'}),
 		})
 		.then(status)
 		.then(json);
