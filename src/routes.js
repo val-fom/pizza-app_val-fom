@@ -1,3 +1,5 @@
+import { AUTH_SERVICE } from './auth/auth-login-service';
+
 import App from './App';
 import Login from './Login';
 import Register from './Register';
@@ -11,27 +13,19 @@ export default [
 	{
 		href: '/',
 		Component: App,
-		authRequired: true,
-		// onEnter: () => {
-		// 	if (!!'auth check') {
-		// 		console.log(this);
-		// 		// navigateTo(this.redirectTo);
-		// 	}
-		// },
+		canActivate: AUTH_SERVICE.isAuthorized,
 	},
 	{
 		href: '/login',
 		Component: Login,
-		authRequired: false,
 	},
 	{
 		href: '/register',
 		Component: Register,
-		authRequired: false,
 	},
 	{
 		href: '/user',
 		Component: User,
-		authRequired: true,
-	}
+		canActivate: AUTH_SERVICE.isAuthorized,
+	},
 ];

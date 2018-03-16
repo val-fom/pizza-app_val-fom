@@ -1,4 +1,6 @@
-import {AUTH_SERVICE} from './auth-login-service.js';
+import { status, json } from '../utils';
+import { AUTH_SERVICE } from './auth-login-service.js';
+
 
 class AuthHttpService {
 	get(url, /*headers*/) {
@@ -14,7 +16,9 @@ class AuthHttpService {
 		return fetch(url, {
 			method: 'GET',
 			headers,
-		}).then(console.log);
+		})
+		.then(status)
+		.then(json)
 	}
 
 	post() {
