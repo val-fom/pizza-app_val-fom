@@ -16,32 +16,33 @@ export default class UserInfo extends Component {
 
 		if (!userData) return '';
 
-		return `
+		const html = `
 			<table class="user-info__table">
 				<caption>User Info</caption>
 				<tbody id="table">
-					<tr>
-						<td>username</td>
-						<td>${userData.username}</td>
-					</tr>
-					<tr>
-						<td>uuid</td>
-						<td>${userData.uuid}</td>
-					</tr>
-					<tr>
-						<td>email</td>
-						<td>${userData.email}</td>
-					</tr>
-					<tr>
-						<td>created_at</td>
-						<td>${userData.created_at}</td>
-					</tr>
-					<tr>
-						<td>last_login</td>
-						<td>${userData.last_login}</td>
-					</tr>
 				</tbody>
 			</table>
+			<div class="user-info__button-wrapper">
+				<a href="#/" class="button user-info__button">Pizza List</a>
+				<a href="#/" class="button user-info__button button--red">
+					Log out
+				</a>
+			</div>
 		`;
+
+		const fragment = parseHTML(html);
+		const table = fragment.getElementById('table');
+
+		for (let key in userData) {
+			const row = parseHTML(`
+					<tr>
+						<td>${key}:</td>
+						<td>${userData[key]}</td>
+					</tr>
+				`);
+			table.append(row);
+		}
+
+		return fragment;
 	}
 }
