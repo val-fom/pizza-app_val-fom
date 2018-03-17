@@ -31,11 +31,11 @@ export default class Router extends Component {
 		const { routes } = this.state;
 		const nextRoute = routes.find(({ href }) => href === url);
 
-		if (!!nextRoute.redirectTo) {
+		if (nextRoute.redirectTo) {
 			return this.handleRedirect(nextRoute.redirectTo);
 		}
 
-		if (!!nextRoute.canActivate && !nextRoute.canActivate()) {
+		if (!!nextRoute.canActivate && !nextRoute.canActivate) {
 			return this.navigateTo('/login');
 		}
 

@@ -12,10 +12,12 @@ export default class UserInfo extends Component {
 		this.host.classList.add('user-info__container');
 
 		this.host.addEventListener('click', ev => this.handleLogout(ev));
+
+		console.log(AUTH_SERVICE.username);
 	}
 
 	handleLogout(ev) {
-		console.log(ev.target);
+		// console.log(ev.target);
 		if (ev.target.dataset.action === 'logout') {
 			AUTH_SERVICE.clearToken();
 		};

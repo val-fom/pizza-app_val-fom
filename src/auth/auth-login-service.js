@@ -4,9 +4,7 @@ import { errorHandler } from '../utils/';
 class AuthService {
 	constructor() {
 		this._token = localStorage.getItem('token') || null;
-		this._claims = null;
-
-		this.isAuthorized = this.isAuthorized.bind(this);
+		this._claims = JSON.parse(localStorage.getItem('claims')) || null;
 	}
 
 	set token(token) {
@@ -18,15 +16,20 @@ class AuthService {
 		return this._token;
 	}
 
-	// set claims() {
+	set claims(claims) {
+		this._claims = claims;
+		localStorage.setItem('claims', JSON.stringify(claims));
+	}
 
-	// }
+	get claims() {
+		return this._claims;
+	}
 
-	// get claims() {
+	get username() {
+		return this.claims.username;
+	}
 
-	// }
-
-	isAuthorized() {
+	get isAuthorized() {
 		return !!this.token;
 	}
 
@@ -37,8 +40,8 @@ class AuthService {
 	clearToken() {
 		this._token = null;
 		localStorage.removeItem('token');
-		// this._claims = null;
-		// localStorage.removeItem('claims');
+		this._claims = null;
+		localStorage.removeItem('claims');
 	}
 
 	login(userData) {
@@ -47,11 +50,19 @@ class AuthService {
 				const { success, token } = response;
 				if (success) {
 					this.token = token;
+					this.claims = this.parseJwtClaims(token);
 					return { success };
 					// ^ incapsulating token in login service
 				}
 				return response;
 			});
+	}
+
+	parseJwtClaims(jwtToken) {
+		const base64Url = jwtToken.split('.')[1];
+		const base64 = base64Url.replace('-', '+').replace('_', '/');
+console.log(JSON.parse(window.atob(base64)));
+		return JSON.parse(window.atob(base64));
 	}
 }
 
