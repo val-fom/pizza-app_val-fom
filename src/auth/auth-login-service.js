@@ -30,12 +30,13 @@ class AuthService {
 	}
 
 	get isAuthorized() {
-		return !!this.token;
+		return this.tokenIsNotExpired();
 	}
 
-	// tokenIsNotExpired() {
-
-	// }
+	tokenIsNotExpired() {
+		if (!this.token) return false;
+		return this.claims.exp < Date.now();
+	}
 
 	clearToken() {
 		this._token = null;
@@ -52,7 +53,7 @@ class AuthService {
 					this.token = token;
 					this.claims = this.parseJwtClaims(token);
 					return { success };
-					// ^ incapsulating token in login service
+					// ^ encapsulating token in login service
 				}
 				return response;
 			});
@@ -61,7 +62,7 @@ class AuthService {
 	parseJwtClaims(jwtToken) {
 		const base64Url = jwtToken.split('.')[1];
 		const base64 = base64Url.replace('-', '+').replace('_', '/');
-console.log(JSON.parse(window.atob(base64)));
+		// console.log(JSON.parse(window.atob(base64)));
 		return JSON.parse(window.atob(base64));
 	}
 }

@@ -13,14 +13,14 @@ export default class UserInfo extends Component {
 
 		this.host.addEventListener('click', ev => this.handleLogout(ev));
 
-		console.log(AUTH_SERVICE.username);
+		// console.log(AUTH_SERVICE.username);
 	}
 
 	handleLogout(ev) {
 		// console.log(ev.target);
 		if (ev.target.dataset.action === 'logout') {
 			AUTH_SERVICE.clearToken();
-		};
+		}
 	}
 
 	render() {

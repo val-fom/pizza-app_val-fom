@@ -35,19 +35,18 @@ export default class Router extends Component {
 			return this.handleRedirect(nextRoute.redirectTo);
 		}
 
-		if (!!nextRoute.canActivate && !nextRoute.canActivate) {
+		if (!nextRoute.canActivate) {
 			return this.navigateTo('/login');
 		}
 
-		if (!!nextRoute.onEnter) {
-			return this.handleOnEnter(nextRoute, url)
+		if (nextRoute.onEnter) {
+			return this.handleOnEnter(nextRoute, url);
 		}
 
 		this.applyRoute(nextRoute, url);
 	}
 
 	handleRedirect(url) {
-		console.log('redirectTo', url);
 		this.navigateTo(url);
 	}
 
