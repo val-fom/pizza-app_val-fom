@@ -68,7 +68,7 @@ export default class Router extends Component {
 		this.updateState({
 			activeRoute: route,
 			activeComponent: componentsInstance,
-		})
+		});
 	}
 
 	render() {
