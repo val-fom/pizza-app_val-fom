@@ -7,11 +7,8 @@ import Main from './components/Main';
 import Footer from './components/Footer';
 
 export default class App extends Component {
-	constructor() {
-		super();
-
-		this.state = {
-		}
+	constructor(props) {
+		super(props);
 
 		this.host = document.createElement('div');
 		this.host.classList.add('app__container');

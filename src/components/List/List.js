@@ -2,8 +2,8 @@ import './list.scss';
 import { Component } from '../../framework';
 
 export default class List extends Component {
-	constructor() {
-		super();
+	constructor(props) {
+		super(props);
 
 		this.host = document.createElement('div');
 		this.host.classList.add('list__container');

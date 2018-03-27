@@ -2,8 +2,8 @@ import './footer.scss';
 import { Component } from '../../framework';
 
 export default class Footer extends Component {
-	constructor() {
-		super();
+	constructor(props) {
+		super(props);
 
 		this.host = document.createElement('div');
 		this.host.classList.add('footer__container');

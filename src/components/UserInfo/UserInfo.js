@@ -5,8 +5,8 @@ import { parseHTML } from '../../utils';
 import { Component } from '../../framework/';
 
 export default class UserInfo extends Component {
-	constructor() {
-		super();
+	constructor(props) {
+		super(props);
 
 		this.host = document.createElement('div');
 		this.host.classList.add('user-info__container');

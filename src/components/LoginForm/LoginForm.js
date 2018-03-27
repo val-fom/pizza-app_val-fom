@@ -6,13 +6,13 @@ import { AUTH_SERVICE } from '../../auth/auth-login-service';
 import Message from '../Message';
 
 export default class LoginForm extends Component {
-	constructor() {
-		super();
+	constructor(props) {
+		super(props);
 
 		this.host = document.createElement('div');
 		this.host.classList.add('login-form__container');
 
-		this.host.addEventListener('submit', ev => this.handleSubmit(ev))
+		this.host.addEventListener('submit', ev => this.handleSubmit(ev));
 
 		this.message = new Message();
 	}

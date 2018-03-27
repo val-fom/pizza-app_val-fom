@@ -6,12 +6,12 @@ import { getStoreList, createUser } from '../../utils/api';
 import Message from '../Message';
 
 export default class RegisterForm extends Component {
-	constructor() {
-		super();
+	constructor(props) {
+		super(props);
 
 		this.state = {
 			stores: [],
-		}
+		};
 
 		this.host = document.createElement('div');
 		this.host.classList.add('login-form__container');
