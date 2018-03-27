@@ -10,11 +10,11 @@ class Component {
 		this.updateState = this.updateState.bind(this);
 	}
 
-	componentsStateWillUpdate(nextState) {}
+	componentsStateWillUpdate(nextState) { }
 
 	updateState(nextState) {
 		this.componentsStateWillUpdate(nextState);
-		this.state = { ...this.state, ...nextState };
+		this.state = Object.assign({}, this.state, nextState);
 		this._render();
 		// console.log(this.constructor.name + ': _state_ updated:', this.state);
 		return this.state;
@@ -27,7 +27,7 @@ class Component {
 		return this._render();
 	}
 
-	beforeUpdate() {}
+	beforeUpdate() { }
 
 	_render() {
 		const children = this.render();
@@ -36,7 +36,7 @@ class Component {
 		return insertChildren(this.host, children);
 	}
 
-	render() {}
+	render() { }
 }
 
 export default Component;
