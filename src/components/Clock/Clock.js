@@ -3,18 +3,19 @@ import { getTime } from '../../utils';
 import { Component } from '../../framework';
 
 export default class Clock extends Component {
-	constructor() {
-		super();
+	constructor(props) {
+		super(props);
+
 		this.state = {
 			currentTime: getTime(),
-		}
+		};
 
 		this.host = document.createElement('div');
 		this.host.classList.add('clock__container');
 
 		setInterval(() => {
 			const currentTime = getTime();
-			this.updateState({ currentTime })
+			this.updateState({ currentTime });
 		}, 1000);
 	}
 

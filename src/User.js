@@ -5,15 +5,15 @@ import { Component } from './framework';
 import Header from './components/Header';
 import UserInfo from './components/UserInfo';
 import Footer from './components/Footer';
-import { AUTH_HTTP } from './auth/auth-http-service.js'
+import { AUTH_HTTP } from './auth/auth-http-service.js';
 
 export default class User extends Component {
-	constructor() {
-		super();
+	constructor(props) {
+		super(props);
 
 		this.state = {
 			userData: null,
-		}
+		};
 
 		this.host = document.createElement('div');
 		this.host.classList.add('login__container');

@@ -4,8 +4,8 @@ import { Component } from '../../framework';
 import List from '../List';
 
 export default class Main extends Component {
-	constructor() {
-		super();
+	constructor(props) {
+		super(props);
 
 		this.host = document.createElement('main');
 		this.host.classList.add('main__container');

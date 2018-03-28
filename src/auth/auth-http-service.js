@@ -3,22 +3,27 @@ import { AUTH_SERVICE } from './auth-login-service.js';
 
 
 class AuthHttpService {
-	get(url, /*headers*/) {
-		if (!AUTH_SERVICE.isAuthorized) {
+	get(url/*, headers*/) {
+		if (!AUTH_SERVICE.isAuthorized()) {
 			throw new Error('Non-authorized request');
 		}
 
-		const headers = new Headers();
-
-		headers.append('Authorization', `Bearer ${AUTH_SERVICE.token}`);
-		headers.append('content-type', 'application/json');
-
 		return fetch(url, {
 			method: 'GET',
-			headers,
+			headers: {
+				'Authorization': `Bearer ${AUTH_SERVICE.token}`,
+				'content-type': 'application/json'
+			}
 		})
-		.then(status)
-		.then(json)
+			.then(status)
+			.then(json)
+			.then(response => {
+				if (response.error === 'Wrong authorization data') {
+					window.location.hash = '/logout';
+				} else {
+					return response;
+				}
+			});
 	}
 
 	post() {

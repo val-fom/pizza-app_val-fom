@@ -31,23 +31,22 @@ export default class Router extends Component {
 		const { routes } = this.state;
 		const nextRoute = routes.find(({ href }) => href === url);
 
-		if (!!nextRoute.redirectTo) {
+		if (nextRoute.redirectTo) {
 			return this.handleRedirect(nextRoute.redirectTo);
 		}
 
-		if (!!nextRoute.canActivate && !nextRoute.canActivate()) {
+		if (nextRoute.canActivate && !nextRoute.canActivate()) {
 			return this.navigateTo('/login');
 		}
 
-		if (!!nextRoute.onEnter) {
-			return this.handleOnEnter(nextRoute, url)
+		if (nextRoute.onEnter) {
+			return this.handleOnEnter(nextRoute/*, url */);
 		}
 
 		this.applyRoute(nextRoute, url);
 	}
 
 	handleRedirect(url) {
-		console.log('redirectTo', url);
 		this.navigateTo(url);
 	}
 
@@ -55,10 +54,10 @@ export default class Router extends Component {
 		window.location.hash = url;
 	}
 
-	handleOnEnter(nextRoute, url) {
+	handleOnEnter(nextRoute/*, url */) {
 		// TODO: parse params using url and nextRout.href
 
-		nextRoute.onEnter(/*params, */this.handleRedirect, nextRoute);
+		nextRoute.onEnter(this.handleRedirect/*, params, nextRoute*/);
 	}
 
 	applyRoute(route, url) {
@@ -69,7 +68,7 @@ export default class Router extends Component {
 		this.updateState({
 			activeRoute: route,
 			activeComponent: componentsInstance,
-		})
+		});
 	}
 
 	render() {

@@ -25,7 +25,7 @@ export default class Message extends Component {
 				</ul>
 			`;
 		} else {
-			return `<p class="message__error">${error}:</p>`;
+			return `<p class="message--error">${error}:</p>`;
 		}
 	}
 }

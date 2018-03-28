@@ -5,8 +5,8 @@ import { Component } from '../../framework';
 import Clock from '../Clock';
 
 export default class Header extends Component {
-	constructor() {
-		super();
+	constructor(props) {
+		super(props);
 
 		this.host = document.createElement('div');
 		this.host.classList.add('header__container');

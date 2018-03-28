@@ -28,4 +28,11 @@ export default [
 		Component: User,
 		canActivate: AUTH_SERVICE.isAuthorized,
 	},
+	{
+		href: '/logout',
+		onEnter(redirect) {
+			AUTH_SERVICE.logout();
+			redirect('/');
+		}
+	}
 ];

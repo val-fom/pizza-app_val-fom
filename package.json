@@ -1,45 +1,44 @@
 {
- "name": "pizza-app",
- "version": "1.0.0",
- "description": "SPA as a part of kottans/frontend course ",
- "main": "index.js",
- "scripts": {
-  "dev": "webpack",
-  "production": "NODE_ENV=production webpack",
-  "watch": "webpack-dev-server"
- },
- "babel": {
-  "presets": [
-   "env"
-  ],
-  "plugins": [
-   "transform-object-rest-spread"
-  ]
- },
- "repository": {
-  "type": "git",
-  "url": "git+https://github.com/kottans-frontend-2018/pizza-app_val-fom.git"
- },
- "keywords": [],
- "author": "Valentyn Fomenko <fomenkovalentyn@gmail.com> (https://github.com/val-fom)",
- "license": "MIT",
- "homepage": "https://github.com/kottans-frontend-2018/pizza-app_val-fom#readme",
- "devDependencies": {
-  "babel-core": "^6.26.0",
-  "babel-loader": "^7.1.4",
-  "babel-plugin-transform-object-rest-spread": "^6.26.0",
-  "babel-preset-env": "^1.6.1",
-  "copy-webpack-plugin": "^4.5.0",
-  "css-loader": "^0.28.10",
-  "extract-text-webpack-plugin": "^3.0.2",
-  "file-loader": "^1.1.11",
-  "font-awesome": "^4.7.0",
-  "html-webpack-plugin": "^2.30.1",
-  "node-sass": "^4.7.2",
-  "sass-loader": "^6.0.7",
-  "style-loader": "^0.20.2",
-  "url-loader": "^0.6.2",
-  "webpack": "^3.11.0",
-  "webpack-dev-server": "^2.11.1"
- }
+	"name": "pizza-app",
+	"version": "1.0.0",
+	"description": "SPA as a part of kottans/frontend course ",
+	"main": "index.js",
+	"scripts": {
+		"dev": "webpack",
+		"build": "NODE_ENV=production webpack",
+		"watch": "webpack-dev-server"
+	},
+	"babel": {
+		"presets": [
+			"env"
+		]
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/kottans-frontend-2018/pizza-app_val-fom.git"
+	},
+	"keywords": [],
+	"author": "Valentyn Fomenko <fomenkovalentyn@gmail.com> (https://github.com/val-fom)",
+	"license": "MIT",
+	"homepage": "https://github.com/kottans-frontend-2018/pizza-app_val-fom#readme",
+	"devDependencies": {
+		"babel-core": "^6.26.0",
+		"babel-loader": "^7.1.4",
+		"babel-preset-env": "^1.6.1",
+		"copy-webpack-plugin": "^4.5.0",
+		"css-loader": "^0.28.10",
+		"extract-text-webpack-plugin": "^3.0.2",
+		"file-loader": "^1.1.11",
+		"font-awesome": "^4.7.0",
+		"html-webpack-plugin": "^2.30.1",
+		"node-sass": "^4.7.2",
+		"sass-loader": "^6.0.7",
+		"style-loader": "^0.20.2",
+		"stylelint": "^9.1.3",
+		"stylelint-config-recommended-scss": "^3.1.0",
+		"stylelint-scss": "^2.5.0",
+		"url-loader": "^0.6.2",
+		"webpack": "^3.11.0",
+		"webpack-dev-server": "^2.11.1"
+	}
 }

@@ -7,8 +7,8 @@ import RegisterForm from './components/RegisterForm';
 import Footer from './components/Footer';
 
 export default class Register extends Component {
-	constructor() {
-		super();
+	constructor(props) {
+		super(props);
 
 		this.host = document.createElement('div');
 		this.host.classList.add('register__container');

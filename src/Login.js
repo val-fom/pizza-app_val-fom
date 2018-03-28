@@ -7,8 +7,8 @@ import LoginForm from './components/LoginForm';
 import Footer from './components/Footer';
 
 export default class Login extends Component {
-	constructor() {
-		super();
+	constructor(props) {
+		super(props);
 
 		this.host = document.createElement('div');
 		this.host.classList.add('login__container');

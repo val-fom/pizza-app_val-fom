@@ -5,7 +5,7 @@ export const getTime = () => {
 	const hh = now.getHours().toString().padStart(2, '0');
 
 	return `${hh}:${mm}:${ss}`;
-}
+};
 
 export const parseHTML = html => {
 	const template = document.createElement('template');
@@ -20,7 +20,7 @@ export const insertChildren = (parent, children) => {
 	} else if (Array.isArray(children)) {
 		children.forEach(child => {
 			(typeof child === 'string') ?
-			parent.insertAdjacentHTML('beforeend', child):
+				parent.insertAdjacentHTML('beforeend', child) :
 				parent.append(child);
 		});
 	} else {
@@ -28,13 +28,13 @@ export const insertChildren = (parent, children) => {
 	}
 
 	return parent;
-}
+};
 
 export const status = res => {
-	if (res.ok || res.status === 400) return res;
-	console.log(res);
+	if (res.ok || res.status === 400 || res.status === 403) return res;
+	console.log('response:', res);
 	throw new Error(res.statusText);
-}
+};
 
 export const json = res => res.json();
 

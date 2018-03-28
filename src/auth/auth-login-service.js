@@ -4,7 +4,7 @@ import { errorHandler } from '../utils/';
 class AuthService {
 	constructor() {
 		this._token = localStorage.getItem('token') || null;
-		this._claims = null;
+		this._claims = JSON.parse(localStorage.getItem('claims')) || null;
 
 		this.isAuthorized = this.isAuthorized.bind(this);
 	}
@@ -18,27 +18,33 @@ class AuthService {
 		return this._token;
 	}
 
-	// set claims() {
-
-	// }
-
-	// get claims() {
-
-	// }
-
-	isAuthorized() {
-		return !!this.token;
+	set claims(claims) {
+		this._claims = claims;
+		localStorage.setItem('claims', JSON.stringify(claims));
 	}
 
-	// tokenIsNotExpired() {
+	get claims() {
+		return this._claims;
+	}
 
-	// }
+	get username() {
+		return this.claims.username;
+	}
 
-	clearToken() {
+	isAuthorized() {
+		return this.tokenIsNotExpired();
+	}
+
+	tokenIsNotExpired() {
+		if (!this.token) return false;
+		return this.claims.exp < Date.now();
+	}
+
+	logout() {
 		this._token = null;
 		localStorage.removeItem('token');
-		// this._claims = null;
-		// localStorage.removeItem('claims');
+		this._claims = null;
+		localStorage.removeItem('claims');
 	}
 
 	login(userData) {
@@ -47,11 +53,18 @@ class AuthService {
 				const { success, token } = response;
 				if (success) {
 					this.token = token;
+					this.claims = this.parseJwtClaims(token);
 					return { success };
-					// ^ incapsulating token in login service
+					// ^ encapsulating token in login service
 				}
 				return response;
 			});
+	}
+
+	parseJwtClaims(jwtToken) {
+		const base64Url = jwtToken.split('.')[1];
+		const base64 = base64Url.replace('-', '+').replace('_', '/');
+		return JSON.parse(window.atob(base64));
 	}
 }
 
