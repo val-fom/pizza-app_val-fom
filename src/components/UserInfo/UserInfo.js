@@ -1,6 +1,6 @@
 import './user-info.scss';
 
-import { AUTH_SERVICE } from '../../auth/auth-login-service';
+import { AUTH_SERVICE } from '../../api';
 import { parseHTML } from '../../utils';
 import { Component } from '../../framework/';
 

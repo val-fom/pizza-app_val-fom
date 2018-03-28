@@ -1,4 +1,4 @@
-import { AUTH_SERVICE } from './auth/auth-login-service';
+import { AUTH_SERVICE } from './api';
 
 import App from './App';
 import Login from './Login';

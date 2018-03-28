@@ -2,7 +2,7 @@ import './register-form.scss';
 
 import { parseHTML } from '../../utils';
 import { Component } from '../../framework';
-import { getStoreList, createUser } from '../../utils/api';
+import { API_SERVICE } from '../../api';
 import Message from '../Message';
 
 export default class RegisterForm extends Component {
@@ -24,7 +24,7 @@ export default class RegisterForm extends Component {
 	}
 
 	getStores() {
-		return getStoreList()
+		return API_SERVICE.getStoreList()
 			.then(stores => this.updateState({ stores }));
 	}
 
@@ -39,7 +39,7 @@ export default class RegisterForm extends Component {
 			store_password: ev.target.store_password.value,
 		};
 
-		return createUser(userData)
+		return API_SERVICE.createUser(userData)
 			.then(response => {
 				if (response.success) {
 					this.message.update({ response });

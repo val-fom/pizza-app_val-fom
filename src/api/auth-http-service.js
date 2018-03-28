@@ -1,6 +1,6 @@
 import { status, json } from '../utils';
-import { AUTH_SERVICE } from './auth-login-service.js';
-
+import { AUTH_SERVICE, API_SERVICE } from '.';
+// TODO: combine this ^ services 
 
 class AuthHttpService {
 	get(url/*, headers*/) {
@@ -19,6 +19,8 @@ class AuthHttpService {
 			.then(json)
 			.then(response => {
 				if (response.error === 'Wrong authorization data') {
+					// the token is not expired, but is invalid
+					// it looks like someone logged in with another browser
 					window.location.hash = '/logout';
 				} else {
 					return response;

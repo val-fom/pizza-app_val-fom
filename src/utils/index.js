@@ -38,10 +38,8 @@ export const status = res => {
 
 export const json = res => res.json();
 
-export const errorHandler = res => {
-	if (res.validations) {
-		throw new Error(res.error + ':\n' + res.validations.join('\n'));
-	} else {
-		throw new Error(res.error);
-	}
+export const parseJwtClaims = jwtToken => {
+	const base64Url = jwtToken.split('.')[1];
+	const base64 = base64Url.replace('-', '+').replace('_', '/');
+	return JSON.parse(window.atob(base64));
 };

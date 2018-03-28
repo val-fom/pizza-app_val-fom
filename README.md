@@ -10,4 +10,4 @@
 * [x] [/login](https://kottans-frontend-2018.github.io/pizza-app_val-fom/dist/#/login)
 * [x] [/register](https://kottans-frontend-2018.github.io/pizza-app_val-fom/dist/#/register)
 * [x] [/user](https://kottans-frontend-2018.github.io/pizza-app_val-fom/dist/#/user) (authorization required)
-* [x] [/logout](https://kottans-frontend-2018.github.io/pizza-app_val-fom/dist/#/register) (will log you out `onEnter`!)
+* [x] [/logout](https://kottans-frontend-2018.github.io/pizza-app_val-fom/dist/#/logout) (will log you out `onEnter`!)
