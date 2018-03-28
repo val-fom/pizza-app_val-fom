@@ -1,4 +1,4 @@
-import { status, json } from './index';
+import { status, json } from '../utils';
 
 class ApiService {
 	constructor() {

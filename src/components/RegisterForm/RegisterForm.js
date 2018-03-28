@@ -2,7 +2,7 @@ import './register-form.scss';
 
 import { parseHTML } from '../../utils';
 import { Component } from '../../framework';
-import { API_SERVICE } from '../../utils/Api';
+import { API_SERVICE } from '../../api/api-service';
 import Message from '../Message';
 
 export default class RegisterForm extends Component {

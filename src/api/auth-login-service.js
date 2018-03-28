@@ -1,5 +1,5 @@
-import { API_SERVICE } from '../utils/Api';
 import { parseJwtClaims } from '../utils';
+import { API_SERVICE } from './api-service';
 
 class AuthService {
 	constructor() {

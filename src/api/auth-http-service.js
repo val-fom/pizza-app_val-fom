@@ -1,5 +1,5 @@
 import { status, json } from '../utils';
-import { AUTH_SERVICE } from './auth-login-service.js';
+import { AUTH_SERVICE } from './auth-login-service';
 
 
 class AuthHttpService {
