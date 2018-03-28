@@ -5,7 +5,7 @@ import { Component } from './framework';
 import Header from './components/Header';
 import UserInfo from './components/UserInfo';
 import Footer from './components/Footer';
-import { AUTH_HTTP } from './api/auth-http-service';
+import { AUTH_HTTP } from './api';
 
 export default class User extends Component {
 	constructor(props) {

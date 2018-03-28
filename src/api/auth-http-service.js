@@ -1,6 +1,6 @@
 import { status, json } from '../utils';
-import { AUTH_SERVICE } from './auth-login-service';
-
+import { AUTH_SERVICE, API_SERVICE } from '.';
+// TODO: combine this ^ services 
 
 class AuthHttpService {
 	get(url/*, headers*/) {
