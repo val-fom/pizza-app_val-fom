@@ -5,6 +5,8 @@ class AuthService {
 	constructor() {
 		this._token = localStorage.getItem('token') || null;
 		this._claims = JSON.parse(localStorage.getItem('claims')) || null;
+
+		this.isAuthorized = this.isAuthorized.bind(this);
 	}
 
 	set token(token) {
@@ -29,7 +31,7 @@ class AuthService {
 		return this.claims.username;
 	}
 
-	get isAuthorized() {
+	isAuthorized() {
 		return this.tokenIsNotExpired();
 	}
 
@@ -39,7 +41,6 @@ class AuthService {
 	}
 
 	logout() {
-		console.log('logged out, this: ', this);
 		this._token = null;
 		localStorage.removeItem('token');
 		this._claims = null;
@@ -63,7 +64,6 @@ class AuthService {
 	parseJwtClaims(jwtToken) {
 		const base64Url = jwtToken.split('.')[1];
 		const base64 = base64Url.replace('-', '+').replace('_', '/');
-		// console.log(JSON.parse(window.atob(base64)));
 		return JSON.parse(window.atob(base64));
 	}
 }

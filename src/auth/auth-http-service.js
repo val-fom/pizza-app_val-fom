@@ -4,7 +4,7 @@ import { AUTH_SERVICE } from './auth-login-service.js';
 
 class AuthHttpService {
 	get(url/*, headers*/) {
-		if (!AUTH_SERVICE.isAuthorized) {
+		if (!AUTH_SERVICE.isAuthorized()) {
 			throw new Error('Non-authorized request');
 		}
 

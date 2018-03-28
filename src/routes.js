@@ -18,12 +18,10 @@ export default [
 	{
 		href: '/login',
 		Component: Login,
-		canActivate: true,
 	},
 	{
 		href: '/register',
 		Component: Register,
-		canActivate: true,
 	},
 	{
 		href: '/user',
@@ -32,7 +30,6 @@ export default [
 	},
 	{
 		href: '/logout',
-		canActivate: true,
 		onEnter(redirect) {
 			AUTH_SERVICE.logout();
 			redirect('/');

@@ -28,7 +28,6 @@ export default class Router extends Component {
 	}
 
 	handleUrlChange(url) {
-		console.log('change url:', url);
 		const { routes } = this.state;
 		const nextRoute = routes.find(({ href }) => href === url);
 
@@ -36,7 +35,7 @@ export default class Router extends Component {
 			return this.handleRedirect(nextRoute.redirectTo);
 		}
 
-		if (!nextRoute.canActivate) {
+		if (nextRoute.canActivate && !nextRoute.canActivate()) {
 			return this.navigateTo('/login');
 		}
 
