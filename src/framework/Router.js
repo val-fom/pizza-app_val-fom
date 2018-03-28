@@ -28,6 +28,7 @@ export default class Router extends Component {
 	}
 
 	handleUrlChange(url) {
+		console.log('change url:', url);
 		const { routes } = this.state;
 		const nextRoute = routes.find(({ href }) => href === url);
 
@@ -40,7 +41,7 @@ export default class Router extends Component {
 		}
 
 		if (nextRoute.onEnter) {
-			return this.handleOnEnter(nextRoute, url);
+			return this.handleOnEnter(nextRoute/*, url */);
 		}
 
 		this.applyRoute(nextRoute, url);
@@ -54,10 +55,10 @@ export default class Router extends Component {
 		window.location.hash = url;
 	}
 
-	handleOnEnter(nextRoute, url) {
+	handleOnEnter(nextRoute/*, url */) {
 		// TODO: parse params using url and nextRout.href
 
-		nextRoute.onEnter(/*params, */this.handleRedirect, nextRoute);
+		nextRoute.onEnter(this.handleRedirect/*, params, nextRoute*/);
 	}
 
 	applyRoute(route, url) {

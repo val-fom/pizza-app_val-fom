@@ -11,16 +11,7 @@ export default class UserInfo extends Component {
 		this.host = document.createElement('div');
 		this.host.classList.add('user-info__container');
 
-		this.host.addEventListener('click', ev => this.handleLogout(ev));
-
 		// console.log(AUTH_SERVICE.username);
-	}
-
-	handleLogout(ev) {
-		// console.log(ev.target);
-		if (ev.target.dataset.action === 'logout') {
-			AUTH_SERVICE.clearToken();
-		}
 	}
 
 	render() {
@@ -36,8 +27,10 @@ export default class UserInfo extends Component {
 			</table>
 			<div class="user-info__button-wrapper">
 				<a href="#/" class="button user-info__button">Pizza List</a>
-				<a href="#/login" class="button user-info__button button--red"
-					data-action="logout">Log out</a>
+				<a href="#/logout" 
+					class="button user-info__button button--red">
+					Log out
+				</a>
 			</div>
 		`;
 

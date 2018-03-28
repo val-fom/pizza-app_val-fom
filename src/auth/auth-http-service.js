@@ -16,7 +16,14 @@ class AuthHttpService {
 			}
 		})
 			.then(status)
-			.then(json);
+			.then(json)
+			.then(response => {
+				if (response.error === 'Wrong authorization data') {
+					window.location.hash = '/logout';
+				} else {
+					return response;
+				}
+			});
 	}
 
 	post() {

@@ -38,7 +38,8 @@ class AuthService {
 		return this.claims.exp < Date.now();
 	}
 
-	clearToken() {
+	logout() {
+		console.log('logged out, this: ', this);
 		this._token = null;
 		localStorage.removeItem('token');
 		this._claims = null;

@@ -14,25 +14,25 @@ export const getStoreList = () => {
 		.then(res => {
 			if (res.ok) return res.json();
 			throw new Error(res.error);
-		})
+		});
 };
 
 export const loginUser = userData => {
 	return fetch(BASE_API_URL + END_POINTS.userLogin, {
-			method: 'POST',
-			body: JSON.stringify(userData),
-			headers: new Headers({'content-type': 'application/json'}),
-		})
+		method: 'POST',
+		body: JSON.stringify(userData),
+		headers: new Headers({ 'content-type': 'application/json' }),
+	})
 		.then(status)
 		.then(json);
 };
 
 export const createUser = userData => {
 	return fetch(BASE_API_URL + END_POINTS.userCreate, {
-			method: 'POST',
-			body: JSON.stringify(userData),
-			headers: new Headers({'content-type': 'application/json'}),
-		})
+		method: 'POST',
+		body: JSON.stringify(userData),
+		headers: new Headers({ 'content-type': 'application/json' }),
+	})
 		.then(status)
 		.then(json);
 };
