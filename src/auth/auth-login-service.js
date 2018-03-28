@@ -1,5 +1,5 @@
-import { loginUser } from '../utils/api';
-import { errorHandler } from '../utils/';
+import { API_SERVICE } from '../utils/Api';
+import { parseJwtClaims } from '../utils';
 
 class AuthService {
 	constructor() {
@@ -47,24 +47,18 @@ class AuthService {
 		localStorage.removeItem('claims');
 	}
 
-	login(userData) {
-		return loginUser(userData)
+	login(credentials) {
+		return API_SERVICE.loginUser(credentials)
 			.then(response => {
 				const { success, token } = response;
 				if (success) {
 					this.token = token;
-					this.claims = this.parseJwtClaims(token);
+					this.claims = parseJwtClaims(token);
 					return { success };
 					// ^ encapsulating token in login service
 				}
 				return response;
 			});
-	}
-
-	parseJwtClaims(jwtToken) {
-		const base64Url = jwtToken.split('.')[1];
-		const base64 = base64Url.replace('-', '+').replace('_', '/');
-		return JSON.parse(window.atob(base64));
 	}
 }
 

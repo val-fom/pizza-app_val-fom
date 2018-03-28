@@ -19,6 +19,8 @@ class AuthHttpService {
 			.then(json)
 			.then(response => {
 				if (response.error === 'Wrong authorization data') {
+					// the token is not expired, but is invalid
+					// it looks like someone logged in with another browser
 					window.location.hash = '/logout';
 				} else {
 					return response;
