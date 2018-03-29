@@ -5,7 +5,7 @@ import { Component } from './framework';
 import Header from './components/Header';
 import UserInfo from './components/UserInfo';
 import Footer from './components/Footer';
-import { AUTH_HTTP } from './api';
+import { API_SERVICE } from './api';
 
 export default class User extends Component {
 	constructor(props) {
@@ -26,7 +26,7 @@ export default class User extends Component {
 	}
 
 	getUserData() {
-		return AUTH_HTTP.get('https://pizza-tele.ga/api/v1/user/my_info')
+		return API_SERVICE.getUserInfo()
 			.then(userData => this.updateState({ userData }));
 	}
 
