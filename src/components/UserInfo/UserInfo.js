@@ -1,6 +1,5 @@
 import './user-info.scss';
 
-import { AUTH_SERVICE } from '../../api';
 import { parseHTML } from '../../utils';
 import { Component } from '../../framework/';
 
@@ -10,8 +9,6 @@ export default class UserInfo extends Component {
 
 		this.host = document.createElement('div');
 		this.host.classList.add('user-info__container');
-
-		// console.log(AUTH_SERVICE.username);
 	}
 
 	render() {

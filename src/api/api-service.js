@@ -1,4 +1,6 @@
 import { status, json } from '../utils';
+import { AUTH_SERVICE } from '.';
+import Header from '../components/Header';
 
 class ApiService {
 	constructor() {
@@ -16,25 +18,46 @@ class ApiService {
 		return this.get(this.END_POINTS.storeList);
 	}
 
+	getUserInfo() {
+		return this.get(this.END_POINTS.userInfo, AUTH_SERVICE.token);
+	}
+
 	loginUser(credentials) {
 		return this.post(this.END_POINTS.userLogin, credentials);
 	}
 
 	createUser(userData) {
-		return this.post(this.END_POINTS.userCreate, userDate);
+		return this.post(this.END_POINTS.userCreate, userData);
 	}
 
-	get(endpoint) {
-		return fetch(this.BASE_API_URL + endpoint)
+	get(endpoint, token) {
+		const headers = new Headers({ 'accept': 'application/json' });
+
+		if (token) {
+			headers.append('Authorization', `Bearer ${token}`);
+		}
+
+		return fetch(this.BASE_API_URL + endpoint, { headers })
 			.then(status)
-			.then(json);
+			.then(json)
+			.then(response => {
+				if (response.error === 'Wrong authorization data') {
+					// the token is not expired, but is invalid
+					// it looks like someone logged in with another browser
+					window.location.hash = '/logout';
+					throw new Error(response.error);
+				} else {
+					return response;
+				}
+			})
+			.catch(console.error);
 	}
 
 	post(endpoint, payload) {
 		return fetch(this.BASE_API_URL + endpoint, {
 			method: 'POST',
 			body: JSON.stringify(payload),
-			headers: { 'content-type': 'application/json' },
+			headers: new Headers({ 'content-type': 'application/json' }),
 		})
 			.then(status)
 			.then(json);

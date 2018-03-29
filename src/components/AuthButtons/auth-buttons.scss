@@ -1,0 +1,11 @@
+@import "../../scss/variables";
+
+.auth__container {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+}
+
+.button.auth__button {
+	// text-transform: initial;
+}

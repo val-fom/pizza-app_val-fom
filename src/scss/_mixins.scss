@@ -1,0 +1,5 @@
+@mixin media-query($value-min, $value-max: "9999") {
+	@media screen and (min-width : #{$value-min}) and (max-width : #{$value-max}) {
+		@content;
+	}
+}

@@ -28,7 +28,7 @@ class AuthService {
 	}
 
 	get username() {
-		return this.claims.username;
+		if (this.isAuthorized()) return this.claims.username;
 	}
 
 	isAuthorized() {

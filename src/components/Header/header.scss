@@ -1,4 +1,5 @@
 @import "../../scss/variables";
+@import "../../scss/_mixins.scss";
 
 .header__container {
 	background: $header-background;
@@ -11,14 +12,10 @@
 	min-height: 15rem;
 	display: grid;
 	grid-template-columns: repeat(3, 1fr);
-	grid-gap: 1rem;
 	align-items: center;
 	justify-items: center;
-	> :first-child {
-		justify-self: left;
-	}
-	> :last-child {
-		justify-self: right;
+	@include media-query(0, 500px) {
+		grid-template-columns: repeat(2, 1fr);
 	}
 }
 
@@ -27,6 +24,18 @@
 	color: white;
 	white-space: nowrap;
 	padding: 1rem 1.5rem;
+	justify-self: left;
+	@include media-query(0, 500px) {
+		justify-self: center;
+		align-self: end;
+	}
+}
+
+.header__logo {
+	@include media-query(0, 500px) {
+		grid-column: 1;
+		grid-row: 1 / 3;
+	}
 }
 
 .logo__img {
@@ -34,18 +43,10 @@
 	margin: auto;
 }
 
-.login__button {
-	background: transparent;
-}
-
-@media screen and (max-width: 500px) {
-	.header {
-		grid-template-columns: repeat(2, 1fr);
-		padding-bottom: 1rem;
-	}
-
-	.header__logo {
-		grid-column: 1 / 3;
-		grid-row: 2 ;
+.header__auth {
+	justify-self: right;
+	@include media-query(0, 500px) {
+		justify-self: center;
+		align-self: start;
 	}
 }

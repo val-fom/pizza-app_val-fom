@@ -3,6 +3,7 @@ import { parseHTML } from '../../utils';
 import { Component } from '../../framework';
 
 import Clock from '../Clock';
+import AuthButtons from '../AuthButtons';
 
 export default class Header extends Component {
 	constructor(props) {
@@ -12,6 +13,7 @@ export default class Header extends Component {
 		this.host.classList.add('header__container');
 
 		this.clock = new Clock();
+		this.authButtons = new AuthButtons();
 	}
 
 	render() {
@@ -25,17 +27,14 @@ export default class Header extends Component {
 							alt="Pizza app logo">
 					</a>
 				</div>
-				<div class="header__login">
-					<a href="#/user" class="button login__button">
-						<i class="fa fa-sign-in"></i>
-						Login/Signup
-					</a>
+				<div class="header__auth" id="buttons">
 				</div>
 			</header>
 		`;
 
 		const fragment = parseHTML(html);
 		fragment.getElementById('time').append(this.clock.update());
+		fragment.getElementById('buttons').append(this.authButtons.update());
 
 		return fragment;
 	}
