@@ -25,7 +25,7 @@ export default class AuthButtons extends Component {
 		const { userName } = this.state;
 
 		return `
-	<a href="${userName ? '#/user' : '#/logout'}" class="button auth__button">
+	<a href="${userName ? '#/user' : '#/register'}" class="button auth__button">
 		<i class="fa ${userName ? 'fa-user' : 'fa-user-plus'}"></i>
 		${userName ? userName : 'Sign up'}
 	</a>
