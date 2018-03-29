@@ -27,7 +27,7 @@ export default class Header extends Component {
 							alt="Pizza app logo">
 					</a>
 				</div>
-				<div class="header__login" id="buttons">
+				<div class="header__auth" id="buttons">
 				</div>
 			</header>
 		`;

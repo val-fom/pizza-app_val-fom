@@ -11,15 +11,28 @@ export default class AuthButtons extends Component {
 		};
 
 		this.host = document.createElement('div');
-		this.host.classList.add('buttons__container');
+		this.host.classList.add('auth__container');
+
+		this.getAuthData();
+	}
+
+	getAuthData() {
+		const userName = AUTH_SERVICE.username;
+		this.updateState({ userName });
 	}
 
 	render() {
+		const { userName } = this.state;
+
 		return `
-		<a href="#/user" class="button login__button">
-			<i class="fa fa-sign-in"></i>
-			Login/Signup
-		</a>
+	<a href="${userName ? '#/user' : '#/logout'}" class="button auth__button">
+		<i class="fa ${userName ? 'fa-user' : 'fa-user-plus'}"></i>
+		${userName ? userName : 'Sign up'}
+	</a>
+	<a href="${userName ? '#/logout' : '#/login'}" class="button auth__button">
+		<i class="fa ${userName ? 'fa-sign-out' : 'fa-sign-in'}"></i>
+		${userName ? 'Logout' : 'Login'}
+	</a>
 		`;
 	}
 }

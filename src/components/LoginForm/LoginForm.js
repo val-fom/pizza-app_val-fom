@@ -51,7 +51,7 @@ export default class LoginForm extends Component {
 		id="password" required>
 	<div class="login-form__button-wrapper">
 		<input type="submit" class="button login-form__button button--sign-in"
-			value="Sign in">
+			value="Login">
 		<a href="#/register" class="button login-form__button button--sign-up">
 			Sign up
 		</a>
