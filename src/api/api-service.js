@@ -21,7 +21,7 @@ class ApiService {
 	}
 
 	createUser(userData) {
-		return this.post(this.END_POINTS.userCreate, userDate);
+		return this.post(this.END_POINTS.userCreate, userData);
 	}
 
 	get(endpoint) {
