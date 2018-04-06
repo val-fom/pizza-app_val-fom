@@ -2,6 +2,8 @@
 
 .main__container {
 	padding: 3rem 0;
+	display: flex;
+	flex-direction: column;
 }
 
 .main__button {
