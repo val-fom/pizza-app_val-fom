@@ -4,13 +4,15 @@ import Header from '../components/Header';
 
 class ApiService {
 	constructor() {
-		this.BASE_API_URL = 'https://pizza-tele.ga/api/v1';
+		this.DOMAIN = 'https://pizza-tele.ga';
+		this.BASE_API_URL = this.DOMAIN + '/api/v1';
 		this.END_POINTS = {
 			storeList: '/store/list',
 			userCreate: '/user/create',
 			userLogin: '/user/login',
 			userInfo: '/user/my_info',
 			ingredientList: '/ingredient/list',
+			tagList: '/tag/list',
 		};
 	}
 
@@ -20,6 +22,14 @@ class ApiService {
 
 	getUserInfo() {
 		return this.get(this.END_POINTS.userInfo, AUTH_SERVICE.token);
+	}
+
+	getIngredientList() {
+		return this.get(this.END_POINTS.ingredientList, AUTH_SERVICE.token);
+	}
+
+	getTagList() {
+		return this.get(this.END_POINTS.tagList, AUTH_SERVICE.token);
 	}
 
 	loginUser(credentials) {

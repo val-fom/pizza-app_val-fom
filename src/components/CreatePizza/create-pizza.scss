@@ -1,0 +1,35 @@
+@import "../../scss/variables";
+
+.create-pizza {
+	display: flex;
+	flex-direction: column;
+	max-width: 300px;
+	margin: 3rem auto;
+	label {
+		color: $color-brown;
+	}
+}
+
+.create-pizza__name,
+.create-pizza__password,
+.create-pizza__email,
+.create-pizza__store_id,
+.create-pizza__store_password {
+	font-size: 1.6rem;
+	padding: 0.6em;
+	margin: 0.2rem 0 1.6rem;
+	border: none;
+	border-radius: 5px;
+}
+
+.create-pizza__store_id {
+	height: 3.8rem;
+}
+
+.create-pizza__button {
+	flex-grow: 1;
+}
+
+.button--register {
+	background: $color-green;
+}
