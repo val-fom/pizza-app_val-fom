@@ -1,5 +1,3 @@
-import './scss/main.scss';
-
 import { Component } from './framework';
 
 import Header from './components/Header';
@@ -11,17 +9,22 @@ export default class Create extends Component {
 		super(props);
 
 		this.host = document.createElement('div');
-		this.host.classList.add('app__container');
+		this.host.classList.add('create__container');
 
 		this.header = new Header();
 		this.createPizza = new CreatePizza();
 		this.footer = new Footer();
+
+		this.main = document.createElement('main');
+		this.main.classList.add('main');
 	}
 
 	render() {
+		this.main.append(this.createPizza.update());
+
 		return [
 			this.header.update(),
-			this.createPizza.update(),
+			this.main,
 			this.footer.update(),
 		];
 	}

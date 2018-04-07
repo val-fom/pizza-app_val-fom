@@ -1,9 +1,8 @@
-import './scss/main.scss';
-
+import { parseHTML } from './utils';
 import { Component } from './framework';
 
 import Header from './components/Header';
-import Main from './components/Main';
+import List from './components/List';
 import Footer from './components/Footer';
 
 export default class App extends Component {
@@ -14,14 +13,28 @@ export default class App extends Component {
 		this.host.classList.add('app__container');
 
 		this.header = new Header();
-		this.main = new Main();
+		this.list = new List();
 		this.footer = new Footer();
+
+		this.main = document.createElement('main');
+		this.main.classList.add('main');
 	}
 
 	render() {
+		const button = `
+			<a href="#/create" class="button main__button">
+				+ Add new pizza
+			</a>
+		`;
+
+		this.main.append(
+			parseHTML(button),
+			this.list.update()
+		);
+
 		return [
 			this.header.update(),
-			this.main.update(),
+			this.main,
 			this.footer.update(),
 		];
 	}
