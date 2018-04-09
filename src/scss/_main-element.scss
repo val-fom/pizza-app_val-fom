@@ -1,0 +1,17 @@
+.main {
+	padding: 3rem 1.5rem;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	flex-direction: column;
+}
+
+.main--create {
+	flex-direction: row;
+}
+
+.main__button {
+	margin: auto;
+	display: block;
+	background: $color-red;
+}

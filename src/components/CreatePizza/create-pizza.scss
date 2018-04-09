@@ -1,5 +1,9 @@
 @import "../../scss/variables";
 
+.pizza__container {
+	flex: 0 0 50%;
+}
+
 .create-pizza {
 	display: flex;
 	flex-direction: column;
@@ -10,11 +14,7 @@
 	}
 }
 
-.create-pizza__name,
-.create-pizza__password,
-.create-pizza__email,
-.create-pizza__store_id,
-.create-pizza__store_password {
+.create-pizza__name {
 	font-size: 1.6rem;
 	padding: 0.6em;
 	margin: 0.2rem 0 1.6rem;

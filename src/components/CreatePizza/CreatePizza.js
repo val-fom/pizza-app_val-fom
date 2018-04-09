@@ -90,7 +90,7 @@ export default class CreatePizza extends Component {
 		<fieldset>
 			<legend>Ingredients:</legend>
 			${ingredients.reduce((html, ingredient) => {
-				console.log(ingredient);
+				// console.log(ingredient);
 				return html += `
 				<label>
 					<img src="${API_SERVICE.DOMAIN}/${ingredient.image_url}" alt="">
@@ -103,7 +103,7 @@ export default class CreatePizza extends Component {
 		<fieldset>
 			<legend>Tags:</legend>
 			${tags.reduce((html, tag) => {
-				console.log(tag);
+				// console.log(tag);
 				return html += `
 				<label>
 					${tag.name}
