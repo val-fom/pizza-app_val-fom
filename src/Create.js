@@ -1,4 +1,5 @@
 import { Component } from './framework';
+import { PIZZA_SERVICE } from './api';
 
 import Header from './components/Header';
 import Canvas from './components/Canvas';
@@ -23,7 +24,6 @@ export default class Create extends Component {
 		this.main.classList.add('main', 'main--create');
 
 		this.onFormChange = this.onFormChange.bind(this);
-
 	}
 
 	onFormChange(ingredients) {
@@ -32,10 +32,19 @@ export default class Create extends Component {
 		});
 	}
 
-	render() {
-		this.main.append(this.canvas.update());
-		this.main.append(this.createPizza.update());
+	beforeUpdate() {
+		PIZZA_SERVICE.preloadAllPizzaData()
+			.then(() => {
+				const { ingredients, tags, images } = PIZZA_SERVICE;
 
+				this.main.append(this.canvas.update());
+				this.main.append(this.createPizza.update({
+					ingredients, tags, images
+				}));
+			});
+	}
+
+	render() {
 		return [
 			this.header.update(),
 			this.main,

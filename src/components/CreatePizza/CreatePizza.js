@@ -2,17 +2,11 @@ import './create-pizza.scss';
 
 import { Component } from '../../framework';
 import { API_SERVICE } from '../../api';
-import { PIZZA_SERVICE } from '../../api';
 import Message from '../Message';
 
 export default class CreatePizza extends Component {
 	constructor(props) {
 		super(props);
-
-		this.state = {
-			ingredients: [],
-			tags: [],
-		};
 
 		this.host = document.createElement('div');
 		this.host.classList.add('pizza__container');
@@ -20,19 +14,7 @@ export default class CreatePizza extends Component {
 		this.host.addEventListener('submit', ev => this.handleSubmit(ev));
 
 		this.message = new Message();
-
-		this.getLists();
 	}
-
-	getLists() {
-		return Promise.all([
-			PIZZA_SERVICE.getIngredients(),
-			PIZZA_SERVICE.getTags(),
-		]).then(([ingredients, tags]) =>
-			this.updateState({ ingredients, tags })
-		);
-	}
-
 
 	handleSubmit(ev) {
 		ev.preventDefault();
@@ -63,14 +45,8 @@ export default class CreatePizza extends Component {
 	}
 
 	render() {
-		const { ingredients, tags } = this.state;
-		console.log('ingredients, tags: ', ingredients, tags);
-
-		// const options = ingredients.map(ingredient => {
-		// 	let selected = '';
-		// 	if (ingredient.id == 2) selected = 'selected';
-		// 	return `<option value="${ingredient.id}" ${selected}>${ingredient.name}</option>`;
-		// }).join('');
+		const { ingredients, tags, images } = this.props;
+		console.log('this.props: ', this.props);
 
 		const form = `
 	<form class="create-pizza__form" method="post">
@@ -90,20 +66,18 @@ export default class CreatePizza extends Component {
 		<fieldset>
 			<legend>Ingredients:</legend>
 			${ingredients.reduce((html, ingredient) => {
-				// console.log(ingredient);
 				return html += `
-				<label>
-					<img src="${API_SERVICE.DOMAIN}/${ingredient.image_url}" alt="">
-					<input type="checkbox" name="${ingredient.name}">
-				</label>
-			`;
+					<label>
+						<img src="${API_SERVICE.DOMAIN}/${ingredient.image_url}" alt="">
+						<input type="checkbox" name="${ingredient.name}">
+					</label>
+				`;
 			}, '')}
 		</fieldset>
 	
 		<fieldset>
 			<legend>Tags:</legend>
 			${tags.reduce((html, tag) => {
-				// console.log(tag);
 				return html += `
 				<label>
 					${tag.name}

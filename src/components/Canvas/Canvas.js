@@ -19,6 +19,7 @@ export default class CreatePizza extends Component {
 
 	draw(images) {
 		// console.log('crust: ', crust);
+		// this.ctx.drawImage(image, 10, 10, 300, 300);
 		this.ctx.fillRect(10, 10, 100, 100);
 	}
 
