@@ -54,40 +54,53 @@ export default class CreatePizza extends Component {
 		<input type="text" class="create-pizza__name" name="name" id="pizza-name" required min="3" max="24">
 		
 		<fieldset>
-			<legend>Pizza size:</legend>
-			<input type="radio" class="size__choice" name="size" id="pizzaSize30" value="30" required>
-			<label for="pizzaSize30">Ø30</label>
-			<input type="radio" class="size__choice" name="size" id="pizzaSize45" value="45" required>
-			<label for="pizzaSize45">Ø45</label>
-			<input type="radio" class="size__choice" name="size" id="pizzaSize60" value="60" required>
-			<label for="pizzaSize60">Ø60</label>
+			<legend class="create-pizza__legend">Pizza size:</legend>
+			<div class="create-pizza__fieldset-inner">
+				<input type="radio" class="size__choice" name="size" id="pizzaSize30" value="30" required>
+				<label for="pizzaSize30">Ø30</label>
+				<input type="radio" class="size__choice" name="size" id="pizzaSize45" value="45" required>
+				<label for="pizzaSize45">Ø45</label>
+				<input type="radio" class="size__choice" name="size" id="pizzaSize60" value="60" required>
+				<label for="pizzaSize60">Ø60</label>
+			</div>
 		</fieldset>
 	
 		<fieldset>
-			<legend>Ingredients:</legend>
+			<legend class="create-pizza__legend">Ingredients:</legend>
+			<div class="create-pizza__fieldset-inner">
 			${ingredients.reduce((html, ingredient) => {
 				return html += `
-					<label>
-						<img src="${API_SERVICE.DOMAIN}/${ingredient.image_url}" alt="">
-						<input type="checkbox" name="${ingredient.name}">
-					</label>
-				`;
-			}, '')}
-		</fieldset>
-	
-		<fieldset>
-			<legend>Tags:</legend>
-			${tags.reduce((html, tag) => {
-				return html += `
 				<label>
-					${tag.name}
-					<input type="checkbox" name="${tag.name}">
+					<input class="create-pizza__checkbox"
+						type="checkbox" name="${ingredient.name}">
+					<span class="create-pizza__checkbox-span create-pizza__checkbox-span--ingredient" style="background-image: url(${API_SERVICE.DOMAIN}/${ingredient.image_url})">
+						${ingredient.name}
+					</span>
 				</label>
 			`;
 			}, '')}
+			</div>
 		</fieldset>
 	
-		<input type="submit" class="button pizza__button" value="Create Pizza">
+		<fieldset>
+			<legend class="create-pizza__legend">Tags:</legend>
+			<div class="create-pizza__fieldset-inner">
+				${tags.reduce((html, tag) => {
+				return html += `
+					<label>
+						<input class="create-pizza__checkbox" type="checkbox" name="${tag.name}">
+						<span class="create-pizza__checkbox-span">${tag.name}</span>
+					</label>
+				`;
+			}, '')}
+			</div>
+		</fieldset>
+	
+		<input 
+			type="submit" 
+			class="button create-pizza__button" 
+			value="Create Pizza"
+		>
 	</form>
 		`;
 

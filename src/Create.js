@@ -39,7 +39,7 @@ export default class Create extends Component {
 
 				this.main.append(this.canvas.update());
 				this.main.append(this.createPizza.update({
-					ingredients, tags, images
+					ingredients, tags
 				}));
 			});
 	}
