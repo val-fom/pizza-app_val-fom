@@ -53,21 +53,27 @@ export default class CreatePizza extends Component {
 		<label for="pizza-name">Pizza name:</label>
 		<input type="text" class="create-pizza__input-text" name="name" id="pizza-name" required min="3" max="24">
 
-		<label for="pizza-description">Description:</label>
-		<textarea class="create-pizza__input-text" name="description" id="pizza-description" rows="2"></textarea>
-		
 		<fieldset>
 			<legend class="create-pizza__legend">Pizza size:</legend>
 			<div class="create-pizza__fieldset-inner">
-				<input type="radio" class="size__choice" name="size" id="pizzaSize30" value="30" required>
-				<label for="pizzaSize30">Ø30</label>
-				<input type="radio" class="size__choice" name="size" id="pizzaSize45" value="45" required>
-				<label for="pizzaSize45">Ø45</label>
-				<input type="radio" class="size__choice" name="size" id="pizzaSize60" value="60" required>
-				<label for="pizzaSize60">Ø60</label>
+				<label class="create-pizza__radio-label">
+					<input class="create-pizza__radio" type="radio" name="size" value="30" required>
+					<span class="create-pizza__radio-span">Ø30 cm</span>
+				</label>
+				<label class="create-pizza__radio-label">
+					<input class="create-pizza__radio" type="radio" name="size" value="45" required>
+					<span class="create-pizza__radio-span">Ø45 cm</span>
+				</label>
+				<label class="create-pizza__radio-label">
+					<input class="create-pizza__radio" type="radio" name="size" value="60" required>
+					<span class="create-pizza__radio-span">Ø60 cm</span>
+				</label>
 			</div>
 		</fieldset>
-	
+
+		<label for="pizza-description">Description:</label>
+		<textarea class="create-pizza__input-text" name="description" id="pizza-description" rows="2"></textarea>
+		
 		<fieldset>
 			<legend class="create-pizza__legend">Ingredients:</legend>
 			<div class="create-pizza__fieldset-inner">
@@ -99,11 +105,18 @@ export default class CreatePizza extends Component {
 			</div>
 		</fieldset>
 	
-		<input 
-			type="submit" 
-			class="button create-pizza__button" 
-			value="Create Pizza"
-		>
+		<div class="create-pizza__button-wrapper">
+			<input 
+				type="reset" 
+				class="button create-pizza__button create-pizza__button--reset" 
+				value="Reset Form"
+			>
+			<input 
+				type="submit" 
+				class="button create-pizza__button create-pizza__button--submit" 
+				value="Create Pizza"
+			>
+		</div>
 	</form>
 		`;
 
