@@ -63,7 +63,6 @@ export default class CreatePizza extends Component {
 
 	render() {
 		const { ingredients, tags, images } = this.props;
-		console.log('this.props: ', this.props);
 
 		const html = `
 	<form class="create-pizza__form" method="post">

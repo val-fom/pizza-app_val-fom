@@ -1,6 +1,6 @@
 import './canvas.scss';
 
-import { parseHTML, getRandomInt } from '../../utils';
+import { parseHTML, getRandomInt, createHoneycombMap } from '../../utils';
 import { PIZZA_SERVICE } from '../../api';
 import { Component } from '../../framework';
 
@@ -17,6 +17,9 @@ export default class CreatePizza extends Component {
 
 		this.canvas.width = 320;
 		this.canvas.height = 320;
+
+		this.map = createHoneycombMap(250, 30);
+		console.log('this.map: ', this.map);
 	}
 
 	draw(images) {
@@ -25,14 +28,26 @@ export default class CreatePizza extends Component {
 		if (!this.props) return;
 		const { ingredients } = this.props;
 
-		ingredients.forEach(ingredient => {
-			const image = PIZZA_SERVICE.images[ingredient];
-			this.ctx.drawImage(
-				image,
-				getRandomInt(100, 200),
-				getRandomInt(100, 200)
-			);
+		this.map.forEach((cell, i) => {
+			if (!(i % 6)) {
+				this.ctx.drawImage(
+					PIZZA_SERVICE.images[ingredients[0]],
+					cell.x + 20,
+					cell.y + 20
+				);
+			}
 		});
+
+		// ingredients.forEach(ingredient => {
+		// 	const image = PIZZA_SERVICE.images[ingredient];
+		// 	this.ctx.drawImage(
+		// 		image,
+		// 		getRandomInt(100, 200),
+		// 		getRandomInt(100, 200)
+		// 	);
+		// });
+
+
 	}
 
 	render() {
