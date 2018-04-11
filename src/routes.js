@@ -1,6 +1,7 @@
 import { AUTH_SERVICE } from './api';
 
 import App from './App';
+import Create from './Create';
 import Login from './Login';
 import Register from './Register';
 import User from './User';
@@ -26,6 +27,11 @@ export default [
 	{
 		href: '/user',
 		Component: User,
+		canActivate: AUTH_SERVICE.isAuthorized,
+	},
+	{
+		href: '/create',
+		Component: Create,
 		canActivate: AUTH_SERVICE.isAuthorized,
 	},
 	{

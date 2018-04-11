@@ -1,3 +1,5 @@
+import './src/scss/main.scss';
+
 import routes from './src/routes';
 import Router from './src/framework/Router';
 

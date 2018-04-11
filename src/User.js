@@ -1,5 +1,3 @@
-// import './scss/login.scss';
-
 import { Component } from './framework';
 
 import Header from './components/Header';
@@ -16,11 +14,14 @@ export default class User extends Component {
 		};
 
 		this.host = document.createElement('div');
-		this.host.classList.add('login__container');
+		this.host.classList.add('user__container');
 
 		this.header = new Header();
 		this.userInfo = new UserInfo();
 		this.footer = new Footer();
+
+		this.main = document.createElement('main');
+		this.main.classList.add('main');
 
 		this.getUserData();
 	}
@@ -33,9 +34,11 @@ export default class User extends Component {
 	render() {
 		const { userData } = this.state;
 
+		this.main.append(this.userInfo.update({ userData }));
+
 		return [
 			this.header.update(),
-			this.userInfo.update({ userData }),
+			this.main,
 			this.footer.update(),
 		];
 	}

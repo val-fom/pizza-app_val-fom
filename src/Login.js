@@ -1,5 +1,3 @@
-// import './scss/login.scss';
-
 import { Component } from './framework';
 
 import Header from './components/Header';
@@ -16,12 +14,17 @@ export default class Login extends Component {
 		this.header = new Header();
 		this.loginForm = new LoginForm();
 		this.footer = new Footer();
+
+		this.main = document.createElement('main');
+		this.main.classList.add('main');
 	}
 
 	render() {
+		this.main.append(this.loginForm.update());
+
 		return [
 			this.header.update(),
-			this.loginForm.update(),
+			this.main,
 			this.footer.update(),
 		];
 	}

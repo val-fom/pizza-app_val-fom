@@ -1,0 +1,20 @@
+.main {
+	padding: 3rem 1.5rem;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	flex-direction: column;
+	max-width: 1170px;
+	margin: auto;
+}
+
+.main--create {
+	padding-top: 5rem;
+	flex-direction: row;
+}
+
+.main__button {
+	margin: auto;
+	display: block;
+	background: $color-red;
+}

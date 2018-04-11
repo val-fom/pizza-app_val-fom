@@ -1,6 +1,5 @@
 import './register-form.scss';
 
-import { parseHTML } from '../../utils';
 import { Component } from '../../framework';
 import { API_SERVICE } from '../../api';
 import Message from '../Message';

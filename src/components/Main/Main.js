@@ -15,7 +15,7 @@ export default class Main extends Component {
 
 	render() {
 		return [
-			'<button class="button main__button">+ Add new pizza</button>',
+			'<a href="#/create" class="button main__button">+ Add new pizza</a>',
 			this.list.update(),
 		];
 	}
