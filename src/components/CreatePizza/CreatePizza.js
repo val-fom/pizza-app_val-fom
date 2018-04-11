@@ -51,7 +51,10 @@ export default class CreatePizza extends Component {
 		const form = `
 	<form class="create-pizza__form" method="post">
 		<label for="pizza-name">Pizza name:</label>
-		<input type="text" class="create-pizza__name" name="name" id="pizza-name" required min="3" max="24">
+		<input type="text" class="create-pizza__input-text" name="name" id="pizza-name" required min="3" max="24">
+
+		<label for="pizza-description">Description:</label>
+		<textarea class="create-pizza__input-text" name="description" id="pizza-description" rows="2"></textarea>
 		
 		<fieldset>
 			<legend class="create-pizza__legend">Pizza size:</legend>
@@ -70,14 +73,14 @@ export default class CreatePizza extends Component {
 			<div class="create-pizza__fieldset-inner">
 			${ingredients.reduce((html, ingredient) => {
 				return html += `
-				<label class="create-pizza__checkbox-label">
-					<input class="create-pizza__checkbox"
-						type="checkbox" name="${ingredient.name}">
-					<span class="create-pizza__checkbox-span create-pizza__checkbox-span--ingredient" style="background-image: url(${API_SERVICE.DOMAIN}/${ingredient.image_url})">
-						${ingredient.name}
-					</span>
-				</label>
-			`;
+					<label class="create-pizza__checkbox-label">
+						<input class="create-pizza__checkbox"
+							type="checkbox" name="${ingredient.name}">
+						<span class="create-pizza__checkbox-span create-pizza__checkbox-span--ingredient" style="background-image: url(${API_SERVICE.DOMAIN}/${ingredient.image_url})">
+							${ingredient.name}
+						</span>
+					</label>
+				`;
 			}, '')}
 			</div>
 		</fieldset>

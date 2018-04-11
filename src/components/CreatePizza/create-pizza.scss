@@ -55,12 +55,13 @@
 	opacity: 1;
 }
 
-.create-pizza__name {
+.create-pizza__input-text {
 	font-size: 1.6rem;
 	padding: 0.6em;
 	margin: 0.2rem 0 1.6rem;
 	border: none;
 	border-radius: 5px;
+	resize: none;
 }
 
 .create-pizza__button {
