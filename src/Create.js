@@ -15,9 +15,7 @@ export default class Create extends Component {
 
 		this.header = new Header();
 		this.canvas = new Canvas();
-		this.createPizza = new CreatePizza({
-			onChange: this.onFormChange,
-		});
+		this.createPizza = new CreatePizza();
 		this.footer = new Footer();
 
 		this.main = document.createElement('main');
@@ -35,11 +33,12 @@ export default class Create extends Component {
 	beforeUpdate() {
 		PIZZA_SERVICE.preloadAllPizzaData()
 			.then(() => {
-				const { ingredients, tags, images } = PIZZA_SERVICE;
+				const { ingredients, tags } = PIZZA_SERVICE;
 
 				this.main.append(this.canvas.update());
 				this.main.append(this.createPizza.update({
-					ingredients, tags
+					ingredients, tags,
+					onChange: this.onFormChange,
 				}));
 			});
 	}

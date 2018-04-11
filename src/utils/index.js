@@ -43,3 +43,7 @@ export const parseJwtClaims = jwtToken => {
 	const base64 = base64Url.replace('-', '+').replace('_', '/');
 	return JSON.parse(window.atob(base64));
 };
+
+export const getRandomInt = (min, max) => {
+	return Math.floor(Math.random() * (max - min)) + min;
+};

@@ -1,5 +1,7 @@
 import './canvas.scss';
 
+import { parseHTML, getRandomInt } from '../../utils';
+import { PIZZA_SERVICE } from '../../api';
 import { Component } from '../../framework';
 
 export default class CreatePizza extends Component {
@@ -18,15 +20,23 @@ export default class CreatePizza extends Component {
 	}
 
 	draw(images) {
-		// console.log('crust: ', crust);
-		// this.ctx.drawImage(image, 10, 10, 300, 300);
-		this.ctx.fillRect(10, 10, 100, 100);
+		this.ctx.drawImage(PIZZA_SERVICE.images.crust, 10, 10, 300, 300);
+
+		if (!this.props) return;
+		const { ingredients } = this.props;
+
+		ingredients.forEach(ingredient => {
+			const image = PIZZA_SERVICE.images[ingredient];
+			this.ctx.drawImage(
+				image,
+				getRandomInt(100, 200),
+				getRandomInt(100, 200)
+			);
+		});
 	}
 
 	render() {
-		// const { images } = this.props;
-
-		this.draw(/* images */);
+		this.draw();
 
 		return this.canvas;
 	}
