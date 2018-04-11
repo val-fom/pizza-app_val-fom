@@ -70,7 +70,7 @@ export default class CreatePizza extends Component {
 			<div class="create-pizza__fieldset-inner">
 			${ingredients.reduce((html, ingredient) => {
 				return html += `
-				<label>
+				<label class="create-pizza__checkbox-label">
 					<input class="create-pizza__checkbox"
 						type="checkbox" name="${ingredient.name}">
 					<span class="create-pizza__checkbox-span create-pizza__checkbox-span--ingredient" style="background-image: url(${API_SERVICE.DOMAIN}/${ingredient.image_url})">
@@ -87,7 +87,7 @@ export default class CreatePizza extends Component {
 			<div class="create-pizza__fieldset-inner">
 				${tags.reduce((html, tag) => {
 				return html += `
-					<label>
+					<label class="create-pizza__checkbox-label">
 						<input class="create-pizza__checkbox" type="checkbox" name="${tag.name}">
 						<span class="create-pizza__checkbox-span">${tag.name}</span>
 					</label>
