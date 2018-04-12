@@ -24,9 +24,11 @@ export default class Create extends Component {
 		this.onFormChange = this.onFormChange.bind(this);
 	}
 
-	onFormChange(ingredients) {
+	onFormChange(ingredients, size, maxSize) {
 		this.canvas.update({
 			ingredients,
+			size,
+			maxSize,
 		});
 	}
 

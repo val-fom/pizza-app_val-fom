@@ -13,53 +13,65 @@ export default class CreatePizza extends Component {
 		this.host.classList.add('pizza__container');
 
 		this.ingredientInputs = null;
+		this.sizeInputs = null;
 
-		this.handleChange = this.handleChange.bind(this);
-		this.host.addEventListener('change', this.handleChange);
+		this.handleFormChange = this.handleFormChange.bind(this);
+		this.host.addEventListener('change', this.handleFormChange);
 		//TODO: shorten `ev => this.handleSubmit(ev)`
 		this.host.addEventListener('submit', ev => this.handleSubmit(ev));
 
 		this.message = new Message();
 	}
 
-	handleChange(ev) {
-		if (!ev.target.matches('[data-ingredient]')) return;
+	handleFormChange(ev) {
+		if (!ev.target.matches('[data-canvas]')) return;
 
 		const checkedIngredients = [];
-		this.ingredientInputs.forEach(ingredient => {
-			if (ingredient.checked) checkedIngredients.push(ingredient.name);
+		this.ingredientInputs.forEach(input => {
+			if (input.checked) checkedIngredients.push(input.name);
 		});
 
-		this.props.onChange(checkedIngredients);
+		let size;
+		let maxSize = 0;
+		this.sizeInputs.forEach(input => {
+			if (input.value > maxSize) {
+				maxSize = +input.value;
+			}
+			if (input.checked) {
+				size = +input.value;
+			}
+		});
+
+		this.props.onChange(checkedIngredients, size, maxSize);
 	}
 
-	handleSubmit(ev) {
-		ev.preventDefault();
-		const pizzaData = {
-			username: ev.target.username.value,
-			password: ev.target.password.value,
-			password_repeat: ev.target.password_repeat.value,
-			email: ev.target.email.value,
-			store_id: +ev.target.store_id.value,
-			store_password: ev.target.store_password.value,
-		};
+	// handleSubmit(ev) {
+	// 	ev.preventDefault();
+	// 	const pizzaData = {
+	// 		username: ev.target.username.value,
+	// 		password: ev.target.password.value,
+	// 		password_repeat: ev.target.password_repeat.value,
+	// 		email: ev.target.email.value,
+	// 		store_id: +ev.target.store_id.value,
+	// 		store_password: ev.target.store_password.value,
+	// 	};
 
-		return API_SERVICE.createPizza(pizzaData)
-			.then(response => {
-				if (response.success) {
-					this.message.update({ response });
-					// redirect to '/login'
-					setTimeout(() => {
-						window.location.hash = '/login';
-					}, 1000);
-					// TODO: employ callback here. Like so:
-					// this.props.onSuccess();
-				} else {
-					this.message.update({ response });
-				}
-			})
-			.catch(console.error);
-	}
+	// 	return API_SERVICE.createPizza(pizzaData)
+	// 		.then(response => {
+	// 			if (response.success) {
+	// 				this.message.update({ response });
+	// 				// redirect to '/login'
+	// 				setTimeout(() => {
+	// 					window.location.hash = '/login';
+	// 				}, 1000);
+	// 				// TODO: employ callback here. Like so:
+	// 				// this.props.onSuccess();
+	// 			} else {
+	// 				this.message.update({ response });
+	// 			}
+	// 		})
+	// 		.catch(console.error);
+	// }
 
 	render() {
 		const { ingredients, tags, images } = this.props;
@@ -73,15 +85,15 @@ export default class CreatePizza extends Component {
 			<legend class="create-pizza__legend">Pizza size:</legend>
 			<div class="create-pizza__fieldset-inner">
 				<label class="create-pizza__radio-label">
-					<input class="create-pizza__radio" type="radio" name="size" value="30" required>
+					<input class="create-pizza__radio" type="radio" name="size" value="30" required data-canvas data-size>
 					<span class="create-pizza__radio-span">Ø30 cm</span>
 				</label>
 				<label class="create-pizza__radio-label">
-					<input class="create-pizza__radio" type="radio" name="size" value="45" required>
+					<input class="create-pizza__radio" type="radio" name="size" value="45" required data-canvas data-size>
 					<span class="create-pizza__radio-span">Ø45 cm</span>
 				</label>
 				<label class="create-pizza__radio-label">
-					<input class="create-pizza__radio" type="radio" name="size" value="60" required>
+					<input class="create-pizza__radio" type="radio" name="size" value="60" checked data-canvas data-size>
 					<span class="create-pizza__radio-span">Ø60 cm</span>
 				</label>
 			</div>
@@ -98,7 +110,7 @@ export default class CreatePizza extends Component {
 					<label class="create-pizza__checkbox-label">
 						<input class="create-pizza__checkbox"
 							type="checkbox" name="${ingredient.name}"
-							value="${ingredient.id}" data-ingredient>
+							value="${ingredient.id}" data-canvas data-ingredient>
 						<span class="create-pizza__checkbox-span create-pizza__checkbox-span--ingredient" style="background-image: url(${API_SERVICE.DOMAIN}/${ingredient.image_url})">
 							${ingredient.name}
 						</span>
@@ -139,6 +151,7 @@ export default class CreatePizza extends Component {
 
 		const form = parseHTML(html);
 		this.ingredientInputs = form.querySelectorAll('[data-ingredient]');
+		this.sizeInputs = form.querySelectorAll('[data-size]');
 
 		return [
 			form,

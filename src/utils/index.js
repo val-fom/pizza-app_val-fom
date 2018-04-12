@@ -47,31 +47,3 @@ export const parseJwtClaims = jwtToken => {
 export const getRandomInt = (min, max) => {
 	return Math.floor(Math.random() * (max - min)) + min;
 };
-
-export const createHoneycombMap = (diameter, cellSize) => {
-	const map = [];
-	const dx = 3 * cellSize / Math.sqrt(3) / 2;
-	const dy = cellSize / 2;
-
-	let x = 0;
-	let y = 0;
-	let k = 0;
-	while (y <= diameter) {
-		while (x <= diameter) {
-			map.push({ x: Math.round(x), y: Math.round(y) });
-			x += 2 * dx;
-		}
-		k++;
-		y = k * dy;
-		(k % 2) ? x = dx : x = 0;
-	}
-
-	const circledMap = map.filter(cell => {
-		const cellRadius = Math.pow(diameter / 2 - cell.x, 2) +
-			Math.pow(diameter / 2 - cell.y, 2);
-
-		return cellRadius < Math.pow(diameter / 2, 2);
-	});
-
-	return circledMap;
-};
