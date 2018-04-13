@@ -1,4 +1,4 @@
-import { parseHTML } from './utils';
+import { parseHTML, getCanvasAsFile } from './utils';
 import { Component } from './framework';
 import { PIZZA_SERVICE } from './api';
 
@@ -37,13 +37,16 @@ export default class Create extends Component {
 	onFormSubmit(formData) {
 		const canvas = document.getElementById('canvas');
 
-		canvas.toBlob(blob => {
-			console.log(blob);
-		});
-
-		for (var pair of formData.entries()) {
-			console.log(pair[0] + ': ' + pair[1]);
-		}
+		getCanvasAsFile(canvas)
+			.then(blob => {
+				formData.append("img", blob, "my_canvas.png");
+				return formData;
+			})
+			.then(formData => {
+				for (var pair of formData.entries()) {
+					console.log(pair[0] + ': ' + pair[1]);
+				}
+			});
 
 		// return API_SERVICE.createPizza(pizzaData)
 		// 	.then(response => {
