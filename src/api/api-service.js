@@ -13,6 +13,7 @@ class ApiService {
 			userInfo: '/user/my_info',
 			ingredientList: '/ingredient/list',
 			tagList: '/tag/list',
+			pizzaCreate: '/pizza/create',
 		};
 	}
 
@@ -30,6 +31,21 @@ class ApiService {
 
 	getTagList() {
 		return this.get(this.END_POINTS.tagList, AUTH_SERVICE.token);
+	}
+
+	createPizza(pizzaData) {
+		const headers = new Headers();
+		headers.append('content-type', 'multipart/formdata');
+		headers.append('Authorization', `Bearer ${AUTH_SERVICE.token}`);
+
+		return fetch(this.BASE_API_URL + this.END_POINTS.userCreate, {
+			method: 'POST',
+			body: pizzaData,
+			headers,
+		})
+			.then(status)
+			.then(json)
+			.catch(console.error);
 	}
 
 	loginUser(credentials) {

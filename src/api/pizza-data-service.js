@@ -44,8 +44,7 @@ class PizzaDataService {
 		return new Promise((resolve, reject) => {
 			const image = new Image();
 
-			image.crossOrigin = "Anonymous";
-
+			image.crossOrigin = 'Anonymous';
 			image.src = url;
 			image.onload = () => resolve({ name, image });
 			image.onerror = e => reject(e);

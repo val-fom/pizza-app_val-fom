@@ -1,6 +1,6 @@
 import { parseHTML, getCanvasAsFile } from './utils';
 import { Component } from './framework';
-import { PIZZA_SERVICE } from './api';
+import { PIZZA_SERVICE, API_SERVICE } from './api';
 
 import Header from './components/Header';
 import Canvas from './components/Canvas';
@@ -39,13 +39,17 @@ export default class Create extends Component {
 
 		getCanvasAsFile(canvas)
 			.then(blob => {
-				formData.append("img", blob, "my_canvas.png");
+				formData.append('img', blob);
 				return formData;
 			})
 			.then(formData => {
 				for (var pair of formData.entries()) {
 					console.log(pair[0] + ': ' + pair[1]);
 				}
+				return formData;
+			})
+			.then(formData => {
+				API_SERVICE.createPizza(formData);
 			});
 
 		// return API_SERVICE.createPizza(pizzaData)
@@ -68,11 +72,11 @@ export default class Create extends Component {
 	beforeUpdate() {
 		PIZZA_SERVICE.preloadAllPizzaData()
 			.then(() => {
-				const { ingredients, tags } = PIZZA_SERVICE;
+				const { ingredients, tags, images } = PIZZA_SERVICE;
 
 				this.main.append(this.canvas.update());
 				this.main.append(this.createPizza.update({
-					ingredients, tags,
+					ingredients, tags, images,
 					onChange: this.onFormChange,
 					onSubmit: this.onFormSubmit,
 				}));
