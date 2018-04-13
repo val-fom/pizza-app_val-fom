@@ -1,6 +1,6 @@
 import { parseHTML, getCanvasAsFile } from './utils';
 import { Component } from './framework';
-import { PIZZA_SERVICE } from './api';
+import { PIZZA_SERVICE, API_SERVICE } from './api';
 
 import Header from './components/Header';
 import Canvas from './components/Canvas';
@@ -46,6 +46,10 @@ export default class Create extends Component {
 				for (var pair of formData.entries()) {
 					console.log(pair[0] + ': ' + pair[1]);
 				}
+				return formData;
+			})
+			.then(formData => {
+				API_SERVICE.createPizza(formData);
 			});
 
 		// return API_SERVICE.createPizza(pizzaData)
