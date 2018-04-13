@@ -128,7 +128,7 @@ export default class CreatePizza extends Component {
 						<input class="create-pizza__checkbox"
 							type="checkbox" name="ingredient"
 							value="${ingredient.id}" data-canvas data-ingredient="${ingredient.name}">
-						<span class="create-pizza__checkbox-span create-pizza__checkbox-span--ingredient" style="background-image: url(${API_SERVICE.DOMAIN}/${ingredient.image_url})">
+						<span class="create-pizza__checkbox-span create-pizza__checkbox-span--ingredient">
 							${ingredient.name}
 						</span>
 					</label>
