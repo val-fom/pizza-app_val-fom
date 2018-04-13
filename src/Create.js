@@ -39,7 +39,7 @@ export default class Create extends Component {
 
 		getCanvasAsFile(canvas)
 			.then(blob => {
-				formData.append("img", blob, "my_canvas.png");
+				formData.append('img', blob);
 				return formData;
 			})
 			.then(formData => {
