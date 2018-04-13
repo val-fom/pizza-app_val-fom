@@ -3,6 +3,7 @@ import './create-pizza.scss';
 import { parseHTML } from '../../utils';
 import { Component } from '../../framework';
 import { API_SERVICE } from '../../api';
+import Total from '../Total';
 import Message from '../Message';
 
 export default class CreatePizza extends Component {
@@ -20,10 +21,12 @@ export default class CreatePizza extends Component {
 		//TODO: shorten `ev => this.handleSubmit(ev)`
 		this.host.addEventListener('submit', ev => this.handleSubmit(ev));
 
+		this.total = new Total();
 		this.message = new Message();
 	}
 
 	handleFormChange(ev) {
+
 		if (!ev.target.matches('[data-canvas]')) return;
 
 		const checkedIngredients = [];
@@ -43,6 +46,18 @@ export default class CreatePizza extends Component {
 		});
 
 		this.props.onChange(checkedIngredients, size, maxSize);
+
+		this._updateTotal(checkedIngredients, size);
+	}
+
+	_updateTotal(checkedIngredients, size) {
+		const { ingredients } = this.props;
+
+		this.total.update({
+			ingredients,
+			checkedIngredients,
+			size
+		});
 	}
 
 	// handleSubmit(ev) {
@@ -133,17 +148,18 @@ export default class CreatePizza extends Component {
 			}, '')}
 			</div>
 		</fieldset>
+
+		<article id="total"></article>
 	
 		<div class="create-pizza__button-wrapper">
-			<input 
-				type="reset" 
+			<a 
+				href="#/"
 				class="button create-pizza__button create-pizza__button--reset" 
-				value="Reset Form"
-			>
+			>Cancel</a>
 			<input 
 				type="submit" 
 				class="button create-pizza__button create-pizza__button--submit" 
-				value="Create Pizza"
+				value="Order Pizza"
 			>
 		</div>
 	</form>
@@ -152,6 +168,8 @@ export default class CreatePizza extends Component {
 		const form = parseHTML(html);
 		this.ingredientInputs = form.querySelectorAll('[data-ingredient]');
 		this.sizeInputs = form.querySelectorAll('[data-size]');
+
+		form.getElementById('total').append(this.total.update());
 
 		return [
 			form,
