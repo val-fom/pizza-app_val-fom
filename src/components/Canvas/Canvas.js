@@ -1,7 +1,7 @@
 import './canvas.scss';
 
 import { Sprite } from '../../utils/Sprite';
-import { HoneycombMap } from '../../utils/HoneycombMap';
+import { CellularMap } from '../../utils/CellularMap';
 import { PIZZA_SERVICE } from '../../api';
 import { Component } from '../../framework';
 
@@ -13,21 +13,22 @@ export default class CreatePizza extends Component {
 		this.host.classList.add('canvas__container');
 
 		this.canvas = document.createElement('canvas');
-		this.canvas.classList.add('canvas__canvas');
 		this.ctx = this.canvas.getContext('2d');
 
 		this.canvas.width = 320;
 		this.canvas.height = 320;
 
-		this.honeycombMap = new HoneycombMap(250, 20, 5);
+		this.cellularMap = new CellularMap(250, 20, 5);
 
-		this.offsetX = (this.canvas.width - this.honeycombMap.diameter) / 2;
-		this.offsetY = (this.canvas.height - this.honeycombMap.diameter) / 2;
+		this.offsetX = (this.canvas.width - this.cellularMap.diameter) / 2;
+		this.offsetY = (this.canvas.height - this.cellularMap.diameter) / 2;
+	}
+
+	_clearCanvas() {
+		this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 	}
 
 	_drawCrust(size = 1, maxSize = 1) {
-		this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-
 		const crust = new Sprite(
 			PIZZA_SERVICE.images.crust,
 			160,
@@ -39,7 +40,7 @@ export default class CreatePizza extends Component {
 	}
 
 	_drawIngredients() {
-		this.honeycombMap.map.forEach(cell => {
+		this.cellularMap.map.forEach(cell => {
 			if (cell.hidden || !cell.ingredient) return;
 
 			const sprite = new Sprite(
@@ -53,6 +54,8 @@ export default class CreatePizza extends Component {
 	}
 
 	render() {
+		this._clearCanvas();
+
 		if (!this.props) {
 			this._drawCrust();
 			return this.canvas;
@@ -60,8 +63,8 @@ export default class CreatePizza extends Component {
 
 		const { ingredients, size, maxSize } = this.props;
 
-		this.honeycombMap.spread(ingredients);
-		this.honeycombMap.hideOutOfBounds(size / maxSize);
+		this.cellularMap.spread(ingredients);
+		this.cellularMap.hideExcessCells(size / maxSize);
 
 		this._drawCrust(size, maxSize);
 		this._drawIngredients();

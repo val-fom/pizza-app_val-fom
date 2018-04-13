@@ -1,6 +1,6 @@
-import { getRandomInt } from "./index";
+import { getRandomInt } from ".";
 
-export class HoneycombMap {
+export class CellularMap {
 	constructor(diameter, cellSize, amplitude) {
 		this.diameter = diameter;
 		this.cellSize = cellSize;
@@ -101,7 +101,7 @@ export class HoneycombMap {
 		});
 	}
 
-	hideOutOfBounds(sizeFactor) {
+	hideExcessCells(sizeFactor) {
 		const radius = this.diameter / 2;
 
 		for (let i = this.map.length - 1; i >= 0; i--) {
