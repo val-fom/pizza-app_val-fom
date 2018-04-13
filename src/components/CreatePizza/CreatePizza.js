@@ -18,6 +18,8 @@ export default class CreatePizza extends Component {
 		this.sizeInputs = null;
 
 		this.handleFormChange = this.handleFormChange.bind(this);
+		this.handleSubmit = this.handleSubmit.bind(this);
+
 		this.host.addEventListener('change', this.handleFormChange);
 		//TODO: shorten `ev => this.handleSubmit(ev)`
 		this.host.addEventListener('submit', ev => this.handleSubmit(ev));
@@ -68,39 +70,64 @@ export default class CreatePizza extends Component {
 		});
 	}
 
-	// handleSubmit(ev) {
-	// 	ev.preventDefault();
-	// 	const pizzaData = {
-	// 		username: ev.target.username.value,
-	// 		password: ev.target.password.value,
-	// 		password_repeat: ev.target.password_repeat.value,
-	// 		email: ev.target.email.value,
-	// 		store_id: +ev.target.store_id.value,
-	// 		store_password: ev.target.store_password.value,
-	// 	};
+	// name
+	// description
+	// size
+	// ingredients
+	// tags
+	// image
 
-	// 	return API_SERVICE.createPizza(pizzaData)
-	// 		.then(response => {
-	// 			if (response.success) {
-	// 				this.message.update({ response });
-	// 				// redirect to '/login'
-	// 				setTimeout(() => {
-	// 					window.location.hash = '/login';
-	// 				}, 1000);
-	// 				// TODO: employ callback here. Like so:
-	// 				// this.props.onSuccess();
-	// 			} else {
-	// 				this.message.update({ response });
-	// 			}
-	// 		})
-	// 		.catch(console.error);
-	// }
+	handleSubmit(ev) {
+		ev.preventDefault();
+
+		const formData = new FormData(this.form);
+
+		const tags = formData.getAll('tag').map(Number);
+		const ingredients = formData.getAll('ingredient').map(Number);
+
+		formData.append('tags', JSON.stringify(tags));
+		formData.append('ingredients', JSON.stringify(ingredients));
+
+		formData.delete('tag');
+		formData.delete('ingredient');
+
+		for (var pair of formData.entries()) {
+			console.log(pair[0] + ': ' + pair[1]);
+		}
+
+
+		// = {
+
+		// 	username: ev.target.username.value,
+		// 	password: ev.target.password.value,
+		// 	password_repeat: ev.target.password_repeat.value,
+		// 	email: ev.target.email.value,
+		// 	store_id: +ev.target.store_id.value,
+		// 	store_password: ev.target.store_password.value,
+		// };
+
+		// return API_SERVICE.createPizza(pizzaData)
+		// 	.then(response => {
+		// 		if (response.success) {
+		// 			this.message.update({ response });
+		// 			// redirect to '/login'
+		// 			setTimeout(() => {
+		// 				window.location.hash = '/login';
+		// 			}, 1000);
+		// 			// TODO: employ callback here. Like so:
+		// 			// this.props.onSuccess();
+		// 		} else {
+		// 			this.message.update({ response });
+		// 		}
+		// 	})
+		// 	.catch(console.error);
+	}
 
 	render() {
 		const { ingredients, tags, images } = this.props;
 
 		const html = `
-	<form class="create-pizza__form" method="post">
+	<form class="create-pizza__form" method="post" id="create-pizza__form">
 		<label for="pizza-name">Pizza name:</label>
 		<input type="text" class="create-pizza__input-text" name="name" id="pizza-name" required min="3" max="24">
 
@@ -150,7 +177,7 @@ export default class CreatePizza extends Component {
 				${tags.reduce((html, tag) => {
 				return html += `
 					<label class="create-pizza__checkbox-label">
-						<input class="create-pizza__checkbox" type="checkbox" name="${tag.name}">
+						<input class="create-pizza__checkbox" type="checkbox" name="tag" value="${tag.id}">
 						<span class="create-pizza__checkbox-span">${tag.name}</span>
 					</label>
 				`;
@@ -179,6 +206,7 @@ export default class CreatePizza extends Component {
 		this.sizeInputs = form.querySelectorAll('[data-size]');
 
 		form.getElementById('total').append(this.total.update());
+		this.form = form.getElementById('create-pizza__form');
 
 		return [
 			form,
