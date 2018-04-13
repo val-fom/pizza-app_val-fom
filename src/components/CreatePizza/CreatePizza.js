@@ -26,7 +26,7 @@ export default class CreatePizza extends Component {
 		this.maxNumberOfIngredients = 6;
 
 		this.total = new Total();
-		this.message = new Message();
+		// this.message = new Message();
 	}
 
 	handleFormChange(ev) {
@@ -72,13 +72,6 @@ export default class CreatePizza extends Component {
 		});
 	}
 
-	// name
-	// description
-	// size
-	// ingredients
-	// tags
-	// image
-
 	handleSubmit(ev) {
 		ev.preventDefault();
 
@@ -93,25 +86,7 @@ export default class CreatePizza extends Component {
 		formData.delete('tag');
 		formData.delete('ingredient');
 
-		for (var pair of formData.entries()) {
-			console.log(pair[0] + ': ' + pair[1]);
-		}
-
-		// return API_SERVICE.createPizza(pizzaData)
-		// 	.then(response => {
-		// 		if (response.success) {
-		// 			this.message.update({ response });
-		// 			// redirect to '/login'
-		// 			setTimeout(() => {
-		// 				window.location.hash = '/login';
-		// 			}, 1000);
-		// 			// TODO: employ callback here. Like so:
-		// 			// this.props.onSuccess();
-		// 		} else {
-		// 			this.message.update({ response });
-		// 		}
-		// 	})
-		// 	.catch(console.error);
+		this.props.onSubmit(formData);
 	}
 
 	render() {
@@ -202,7 +177,7 @@ export default class CreatePizza extends Component {
 
 		return [
 			form,
-			this.message.update(),
+			// this.message.update(),
 		];
 	}
 }
