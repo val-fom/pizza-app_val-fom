@@ -1,6 +1,7 @@
 import './canvas.scss';
 
-import { parseHTML, getRandomInt } from '../../utils';
+import { Sprite } from '../../utils/Sprite';
+import { CellularMap } from '../../utils/CellularMap';
 import { PIZZA_SERVICE } from '../../api';
 import { Component } from '../../framework';
 
@@ -12,31 +13,63 @@ export default class CreatePizza extends Component {
 		this.host.classList.add('canvas__container');
 
 		this.canvas = document.createElement('canvas');
-		this.canvas.classList.add('canvas__canvas');
+		this.canvas.id = 'canvas';
+
 		this.ctx = this.canvas.getContext('2d');
 
 		this.canvas.width = 320;
 		this.canvas.height = 320;
+
+		this.cellularMap = new CellularMap(250, 20, 5);
+
+		this.offsetX = (this.canvas.width - this.cellularMap.diameter) / 2;
+		this.offsetY = (this.canvas.height - this.cellularMap.diameter) / 2;
 	}
 
-	draw(images) {
-		this.ctx.drawImage(PIZZA_SERVICE.images.crust, 10, 10, 300, 300);
+	_clearCanvas() {
+		this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+	}
 
-		if (!this.props) return;
-		const { ingredients } = this.props;
+	_drawCrust(size = 1, maxSize = 1) {
+		const crust = new Sprite(
+			PIZZA_SERVICE.images.crust,
+			160,
+			160,
+			310 * size / maxSize,
+			310 * size / maxSize
+		);
+		crust.draw(this.ctx);
+	}
 
-		ingredients.forEach(ingredient => {
-			const image = PIZZA_SERVICE.images[ingredient];
-			this.ctx.drawImage(
-				image,
-				getRandomInt(100, 200),
-				getRandomInt(100, 200)
+	_drawIngredients() {
+		this.cellularMap.map.forEach(cell => {
+			if (cell.hidden || !cell.ingredient) return;
+
+			const sprite = new Sprite(
+				PIZZA_SERVICE.images[cell.ingredient],
+				cell.x + this.offsetX,
+				cell.y + this.offsetY,
+				15, 15
 			);
+			sprite.draw(this.ctx);
 		});
 	}
 
 	render() {
-		this.draw();
+		this._clearCanvas();
+
+		if (!this.props) {
+			this._drawCrust();
+			return this.canvas;
+		}
+
+		const { ingredients, size, maxSize } = this.props;
+
+		this.cellularMap.spread(ingredients);
+		this.cellularMap.hideExcessCells(size / maxSize);
+
+		this._drawCrust(size, maxSize);
+		this._drawIngredients();
 
 		return this.canvas;
 	}

@@ -1,3 +1,4 @@
+import { parseHTML } from './utils';
 import { Component } from './framework';
 import { PIZZA_SERVICE } from './api';
 
@@ -22,12 +23,43 @@ export default class Create extends Component {
 		this.main.classList.add('main', 'main--create');
 
 		this.onFormChange = this.onFormChange.bind(this);
+		this.onFormSubmit = this.onFormSubmit.bind(this);
 	}
 
-	onFormChange(ingredients) {
+	onFormChange(ingredients, size, maxSize) {
 		this.canvas.update({
 			ingredients,
+			size,
+			maxSize,
 		});
+	}
+
+	onFormSubmit(formData) {
+		const canvas = document.getElementById('canvas');
+
+		canvas.toBlob(blob => {
+			console.log(blob);
+		});
+
+		for (var pair of formData.entries()) {
+			console.log(pair[0] + ': ' + pair[1]);
+		}
+
+		// return API_SERVICE.createPizza(pizzaData)
+		// 	.then(response => {
+		// 		if (response.success) {
+		// 			this.message.update({ response });
+		// 			// redirect to '/login'
+		// 			setTimeout(() => {
+		// 				window.location.hash = '/login';
+		// 			}, 1000);
+		// 			// TODO: employ callback here. Like so:
+		// 			// this.props.onSuccess();
+		// 		} else {
+		// 			this.message.update({ response });
+		// 		}
+		// 	})
+		// 	.catch(console.error);
 	}
 
 	beforeUpdate() {
@@ -39,11 +71,20 @@ export default class Create extends Component {
 				this.main.append(this.createPizza.update({
 					ingredients, tags,
 					onChange: this.onFormChange,
+					onSubmit: this.onFormSubmit,
 				}));
 			});
 	}
 
 	render() {
+		const heading = `
+			<h2 class="main__heading">Create and order your pizza!</h2>
+		`;
+
+		this.main.append(
+			parseHTML(heading)
+		);
+
 		return [
 			this.header.update(),
 			this.main,
