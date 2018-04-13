@@ -45,7 +45,7 @@ class ApiService {
 		})
 			.then(status)
 			.then(json)
-			.then(console.log); //TODO: del this line
+			.catch(console.error);
 	}
 
 	loginUser(credentials) {

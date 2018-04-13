@@ -39,6 +39,7 @@
 
 .create-pizza__checkbox-span,
 .create-pizza__radio-span {
+	position: relative;
 	display: block;
 	font-size: 1.4rem;
 	padding: 0.8em 1em;
@@ -55,6 +56,14 @@
 	padding-left: 40px;
 	background-position: 5px 50%;
 	background-repeat: no-repeat;
+}
+
+.create-pizza__span-image {
+	position: absolute;
+	top: 50%;
+	left: 5px;
+	transform: translateY(-50%);
+	width: 30px;
 }
 
 .create-pizza__checkbox:checked + .create-pizza__checkbox-span,

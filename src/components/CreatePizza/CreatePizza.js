@@ -186,8 +186,9 @@ export default class CreatePizza extends Component {
 
 		this.ingredientInputs.forEach(input => {
 			const ingredient = input.dataset.ingredient;
-			input.nextElementSibling.style
-				.backgroundImage = `url(${images[ingredient].src})`;
+			const image = images[ingredient];
+			image.classList.add('create-pizza__span-image');
+			input.nextElementSibling.append(image);
 		});
 
 		form.getElementById('total').append(this.total.update());
