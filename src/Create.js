@@ -1,3 +1,4 @@
+import { parseHTML } from './utils';
 import { Component } from './framework';
 import { PIZZA_SERVICE } from './api';
 
@@ -46,6 +47,14 @@ export default class Create extends Component {
 	}
 
 	render() {
+		const heading = `
+			<h2 class="main__heading">Create and order your pizza!</h2>
+		`;
+
+		this.main.append(
+			parseHTML(heading)
+		);
+
 		return [
 			this.header.update(),
 			this.main,

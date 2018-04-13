@@ -18,3 +18,13 @@
 	display: block;
 	background: $color-red;
 }
+
+.main__heading {
+	width: 100%;
+	text-align: center;
+	color: $color-brown;
+	text-transform: uppercase;
+	font-size: 2.5rem;
+	letter-spacing: 0.1em;
+	margin: 2rem 0;
+}
