@@ -136,6 +136,9 @@ export default class CreatePizza extends Component {
 						<span class="create-pizza__checkbox-span 
 							create-pizza__checkbox-span--ingredient">
 							${ingredient.name}
+							<img src="${API_SERVICE.DOMAIN}/
+								${ingredient.image_url}" 
+								class="create-pizza__span-image" crossOrigin>
 						</span>
 					</label>
 				`;
@@ -183,13 +186,6 @@ export default class CreatePizza extends Component {
 		this.form = form.getElementById('create-pizza__form');
 		this.ingredientInputs = form.querySelectorAll('[data-ingredient]');
 		this.sizeInputs = form.querySelectorAll('[data-size]');
-
-		this.ingredientInputs.forEach(input => {
-			const ingredient = input.dataset.ingredient;
-			const image = images[ingredient];
-			image.classList.add('create-pizza__span-image');
-			input.nextElementSibling.append(image);
-		});
 
 		form.getElementById('total').append(this.total.update());
 
