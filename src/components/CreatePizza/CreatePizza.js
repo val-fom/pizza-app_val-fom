@@ -21,8 +21,7 @@ export default class CreatePizza extends Component {
 		this.handleSubmit = this.handleSubmit.bind(this);
 
 		this.host.addEventListener('change', this.handleFormChange);
-		//TODO: shorten `ev => this.handleSubmit(ev)`
-		this.host.addEventListener('submit', ev => this.handleSubmit(ev));
+		this.host.addEventListener('submit', this.handleSubmit);
 
 		this.maxNumberOfIngredients = 6;
 
@@ -35,12 +34,15 @@ export default class CreatePizza extends Component {
 
 		const checkedIngredients = [];
 		this.ingredientInputs.forEach(input => {
-			if (input.checked) checkedIngredients.push(input.name);
+			if (input.checked) {
+				checkedIngredients.push(input.dataset.ingredient);
+			}
 		});
 
 		if (checkedIngredients.length > this.maxNumberOfIngredients) {
 			ev.target.checked = false;
-			const excessIngrIndex = checkedIngredients.indexOf(ev.target.name);
+			const excessIngrIndex = checkedIngredients
+				.indexOf(ev.target.dataset.ingredient);
 			checkedIngredients.splice(excessIngrIndex, 1);
 		}
 
@@ -94,17 +96,6 @@ export default class CreatePizza extends Component {
 		for (var pair of formData.entries()) {
 			console.log(pair[0] + ': ' + pair[1]);
 		}
-
-
-		// = {
-
-		// 	username: ev.target.username.value,
-		// 	password: ev.target.password.value,
-		// 	password_repeat: ev.target.password_repeat.value,
-		// 	email: ev.target.email.value,
-		// 	store_id: +ev.target.store_id.value,
-		// 	store_password: ev.target.store_password.value,
-		// };
 
 		// return API_SERVICE.createPizza(pizzaData)
 		// 	.then(response => {
@@ -160,8 +151,8 @@ export default class CreatePizza extends Component {
 				return html += `
 					<label class="create-pizza__checkbox-label">
 						<input class="create-pizza__checkbox"
-							type="checkbox" name="${ingredient.name}"
-							value="${ingredient.id}" data-canvas data-ingredient>
+							type="checkbox" name="ingredient"
+							value="${ingredient.id}" data-canvas data-ingredient="${ingredient.name}">
 						<span class="create-pizza__checkbox-span create-pizza__checkbox-span--ingredient" style="background-image: url(${API_SERVICE.DOMAIN}/${ingredient.image_url})">
 							${ingredient.name}
 						</span>
@@ -202,11 +193,12 @@ export default class CreatePizza extends Component {
 		`;
 
 		const form = parseHTML(html);
+
+		this.form = form.getElementById('create-pizza__form');
 		this.ingredientInputs = form.querySelectorAll('[data-ingredient]');
 		this.sizeInputs = form.querySelectorAll('[data-size]');
 
 		form.getElementById('total').append(this.total.update());
-		this.form = form.getElementById('create-pizza__form');
 
 		return [
 			form,
