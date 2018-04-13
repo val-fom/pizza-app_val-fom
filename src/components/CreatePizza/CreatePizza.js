@@ -22,18 +22,25 @@ export default class CreatePizza extends Component {
 		//TODO: shorten `ev => this.handleSubmit(ev)`
 		this.host.addEventListener('submit', ev => this.handleSubmit(ev));
 
+		this.maxNumberOfIngredients = 6;
+
 		this.total = new Total();
 		this.message = new Message();
 	}
 
 	handleFormChange(ev) {
-
 		if (!ev.target.matches('[data-canvas]')) return;
 
 		const checkedIngredients = [];
 		this.ingredientInputs.forEach(input => {
 			if (input.checked) checkedIngredients.push(input.name);
 		});
+
+		if (checkedIngredients.length > this.maxNumberOfIngredients) {
+			ev.target.checked = false;
+			const excessIngrIndex = checkedIngredients.indexOf(ev.target.name);
+			checkedIngredients.splice(excessIngrIndex, 1);
+		}
 
 		let size;
 		let maxSize = 0;
@@ -116,7 +123,8 @@ export default class CreatePizza extends Component {
 		</fieldset>
 
 		<label for="pizza-description">Description:</label>
-		<textarea class="create-pizza__input-text" name="description" id="pizza-description" rows="2"></textarea>
+		<textarea class="create-pizza__input-text" name="description"
+			id="pizza-description"></textarea>
 		
 		<fieldset>
 			<legend class="create-pizza__legend">Ingredients:</legend>
