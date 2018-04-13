@@ -95,21 +95,25 @@ export default class CreatePizza extends Component {
 		const html = `
 	<form class="create-pizza__form" method="post" id="create-pizza__form">
 		<label for="pizza-name">Pizza name:</label>
-		<input type="text" class="create-pizza__input-text" name="name" id="pizza-name" required min="3" max="24">
+		<input type="text" class="create-pizza__input-text" name="name" 
+			id="pizza-name" required min="3" max="24">
 
 		<fieldset>
 			<legend class="create-pizza__legend">Pizza size:</legend>
 			<div class="create-pizza__fieldset-inner">
 				<label class="create-pizza__radio-label">
-					<input class="create-pizza__radio" type="radio" name="size" value="30" required data-canvas data-size>
+					<input class="create-pizza__radio" type="radio" name="size"
+						value="30" required data-canvas data-size>
 					<span class="create-pizza__radio-span">Ø30 cm</span>
 				</label>
 				<label class="create-pizza__radio-label">
-					<input class="create-pizza__radio" type="radio" name="size" value="45" required data-canvas data-size>
+					<input class="create-pizza__radio" type="radio" name="size"
+						value="45" required data-canvas data-size>
 					<span class="create-pizza__radio-span">Ø45 cm</span>
 				</label>
 				<label class="create-pizza__radio-label">
-					<input class="create-pizza__radio" type="radio" name="size" value="60" checked data-canvas data-size>
+					<input class="create-pizza__radio" type="radio" name="size"
+						value="60" checked data-canvas data-size>
 					<span class="create-pizza__radio-span">Ø60 cm</span>
 				</label>
 			</div>
@@ -127,8 +131,10 @@ export default class CreatePizza extends Component {
 					<label class="create-pizza__checkbox-label">
 						<input class="create-pizza__checkbox"
 							type="checkbox" name="ingredient"
-							value="${ingredient.id}" data-canvas data-ingredient="${ingredient.name}">
-						<span class="create-pizza__checkbox-span create-pizza__checkbox-span--ingredient">
+							value="${ingredient.id}" data-canvas 
+								data-ingredient="${ingredient.name}">
+						<span class="create-pizza__checkbox-span 
+							create-pizza__checkbox-span--ingredient">
 							${ingredient.name}
 						</span>
 					</label>
@@ -143,8 +149,11 @@ export default class CreatePizza extends Component {
 				${tags.reduce((html, tag) => {
 				return html += `
 					<label class="create-pizza__checkbox-label">
-						<input class="create-pizza__checkbox" type="checkbox" name="tag" value="${tag.id}">
-						<span class="create-pizza__checkbox-span">${tag.name}</span>
+						<input class="create-pizza__checkbox" type="checkbox"
+							name="tag" value="${tag.id}">
+						<span class="create-pizza__checkbox-span">
+							${tag.name}
+						</span>
 					</label>
 				`;
 			}, '')}
@@ -156,11 +165,13 @@ export default class CreatePizza extends Component {
 		<div class="create-pizza__button-wrapper">
 			<a 
 				href="#/"
-				class="button create-pizza__button create-pizza__button--reset" 
+				class="button create-pizza__button 
+					create-pizza__button--reset" 
 			>Cancel</a>
 			<input 
 				type="submit" 
-				class="button create-pizza__button create-pizza__button--submit" 
+				class="button create-pizza__button 
+					create-pizza__button--submit" 
 				value="Order Pizza"
 			>
 		</div>
@@ -172,6 +183,12 @@ export default class CreatePizza extends Component {
 		this.form = form.getElementById('create-pizza__form');
 		this.ingredientInputs = form.querySelectorAll('[data-ingredient]');
 		this.sizeInputs = form.querySelectorAll('[data-size]');
+
+		this.ingredientInputs.forEach(input => {
+			const ingredient = input.dataset.ingredient;
+			input.nextElementSibling.style
+				.backgroundImage = `url(${images[ingredient].src})`;
+		});
 
 		form.getElementById('total').append(this.total.update());
 
