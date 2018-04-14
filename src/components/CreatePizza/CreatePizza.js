@@ -29,6 +29,19 @@ export default class CreatePizza extends Component {
 		// this.message = new Message();
 	}
 
+	shadeIngredients() {
+		this.ingredientInputs.forEach(input => {
+			if (input.checked) return;
+			input.nextElementSibling.classList.add('js-shadowed');
+		});
+	}
+
+	restoreIngredients() {
+		this.ingredientInputs.forEach(input => {
+			input.nextElementSibling.classList.remove('js-shadowed');
+		});
+	}
+
 	handleFormChange(ev) {
 		if (!ev.target.matches('[data-canvas]')) return;
 
@@ -38,6 +51,12 @@ export default class CreatePizza extends Component {
 				checkedIngredients.push(input.dataset.ingredient);
 			}
 		});
+
+		if (checkedIngredients.length > this.maxNumberOfIngredients - 1) {
+			this.shadeIngredients();
+		} else {
+			this.restoreIngredients();
+		}
 
 		if (checkedIngredients.length > this.maxNumberOfIngredients) {
 			ev.target.checked = false;
