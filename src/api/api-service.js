@@ -35,10 +35,10 @@ class ApiService {
 
 	createPizza(pizzaData) {
 		const headers = new Headers();
-		headers.append('content-type', 'multipart/formdata');
+		// headers.append('content-type', 'multipart/formdata');
 		headers.append('Authorization', `Bearer ${AUTH_SERVICE.token}`);
 
-		return fetch(this.BASE_API_URL + this.END_POINTS.userCreate, {
+		return fetch(this.BASE_API_URL + this.END_POINTS.pizzaCreate, {
 			method: 'POST',
 			body: pizzaData,
 			headers,

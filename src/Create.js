@@ -39,15 +39,15 @@ export default class Create extends Component {
 
 		getCanvasAsFile(canvas)
 			.then(blob => {
-				formData.append('img', blob);
+				formData.append('image', blob);
 				return formData;
 			})
-			.then(formData => {
-				for (var pair of formData.entries()) {
-					console.log(pair[0] + ': ' + pair[1]);
-				}
-				return formData;
-			})
+			// .then(formData => {
+			// 	for (var pair of formData.entries()) {
+			// 		console.log(pair[0] + ': ' + pair[1]);
+			// 	}
+			// 	return formData;
+			// })
 			.then(formData => {
 				API_SERVICE.createPizza(formData);
 			});
