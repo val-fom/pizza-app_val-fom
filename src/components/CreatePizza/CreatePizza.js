@@ -23,8 +23,6 @@ export default class CreatePizza extends Component {
 		this.host.addEventListener('change', this.handleFormChange);
 		this.host.addEventListener('submit', this.handleSubmit);
 
-		this.maxNumberOfIngredients = 6;
-
 		this.total = new Total();
 		// this.message = new Message();
 	}
@@ -43,6 +41,8 @@ export default class CreatePizza extends Component {
 	}
 
 	handleFormChange(ev) {
+		const { maxNumberOfIngredients } = this.props;
+
 		if (!ev.target.matches('[data-canvas]')) return;
 
 		const checkedIngredients = [];
@@ -52,13 +52,13 @@ export default class CreatePizza extends Component {
 			}
 		});
 
-		if (checkedIngredients.length > this.maxNumberOfIngredients - 1) {
+		if (checkedIngredients.length > maxNumberOfIngredients - 1) {
 			this.shadeIngredients();
 		} else {
 			this.restoreIngredients();
 		}
 
-		if (checkedIngredients.length > this.maxNumberOfIngredients) {
+		if (checkedIngredients.length > maxNumberOfIngredients) {
 			ev.target.checked = false;
 			const excessIngrIndex = checkedIngredients
 				.indexOf(ev.target.dataset.ingredient);

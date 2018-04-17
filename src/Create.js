@@ -72,11 +72,13 @@ export default class Create extends Component {
 	beforeUpdate() {
 		PIZZA_SERVICE.preloadAllPizzaData()
 			.then(() => {
-				const { ingredients, tags, images } = PIZZA_SERVICE;
+				const { ingredients, tags, images,
+					maxNumberOfIngredients } = PIZZA_SERVICE;
 
 				this.main.append(this.canvas.update());
 				this.main.append(this.createPizza.update({
 					ingredients, tags, images,
+					maxNumberOfIngredients,
 					onChange: this.onFormChange,
 					onSubmit: this.onFormSubmit,
 				}));

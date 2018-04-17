@@ -20,7 +20,8 @@ export default class CreatePizza extends Component {
 		this.canvas.width = 320;
 		this.canvas.height = 320;
 
-		this.cellularMap = new CellularMap(250, 20, 5);
+		const { maxNumberOfIngredients } = PIZZA_SERVICE;
+		this.cellularMap = new CellularMap(250, 20, maxNumberOfIngredients, 5);
 
 		this.offsetX = (this.canvas.width - this.cellularMap.diameter) / 2;
 		this.offsetY = (this.canvas.height - this.cellularMap.diameter) / 2;

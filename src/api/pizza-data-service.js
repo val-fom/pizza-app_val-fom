@@ -5,6 +5,7 @@ class PizzaDataService {
 		this.ingredients = [];
 		this.tags = [];
 		this.images = {};
+		this.maxNumberOfIngredients = 6;
 
 		this.crust_pizza = `${API_SERVICE.DOMAIN}/static/images/pizza.png`;
 	}

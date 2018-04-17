@@ -1,20 +1,20 @@
 import { getRandomInt } from ".";
 
 export class CellularMap {
-	constructor(diameter, cellSize, amplitude) {
+	constructor(diameter, cellSize, maxNumberOfIngredients, amplitude) {
 		this.diameter = diameter;
 		this.cellSize = cellSize;
 		this.dx = 3 * cellSize / Math.sqrt(3) / 2;
 		this.dy = cellSize / 2;
 		this.amplitude = amplitude;
-		this.map = this.createMap();
-		this.maxNumberOfIngredients = 6;
+		this.map = this._createMap();
+		this.maxNumberOfIngredients = maxNumberOfIngredients;
 		this.maxNumberOfCopies = Math.floor(this.map.length /
 			this.maxNumberOfIngredients);
 		this.ingredients = [];
 	}
 
-	createMap() {
+	_createMap() {
 		const map = [];
 
 		let x = 0;
