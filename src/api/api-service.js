@@ -14,6 +14,7 @@ class ApiService {
 			ingredientList: '/ingredient/list',
 			tagList: '/tag/list',
 			pizzaCreate: '/pizza/create',
+			pizzaList: '/pizza/list	',
 		};
 	}
 
@@ -23,6 +24,10 @@ class ApiService {
 
 	getUserInfo() {
 		return this.get(this.END_POINTS.userInfo, AUTH_SERVICE.token);
+	}
+
+	getPizzas() {
+		return this.get(this.END_POINTS.pizzaList, AUTH_SERVICE.token);
 	}
 
 	getIngredientList() {

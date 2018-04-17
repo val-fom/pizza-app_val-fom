@@ -1,5 +1,7 @@
 import './list.scss';
 import { Component } from '../../framework';
+import { API_SERVICE } from '../../api';
+import { getTime } from "../../utils";
 
 export default class List extends Component {
 	constructor(props) {
@@ -10,20 +12,25 @@ export default class List extends Component {
 	}
 
 	render() {
-		const list = [];
-		for (var i = 11; i >= 0; i--) {
-			const article = `
-				<article class="list__item">
-					<img src="img/item__pizza_2x.png" alt="" class="item__pic">
-					<time class="item__order-time">10:25:46</time>
-					<h3 class="item__number-in-queue">#1</h3>
-					<time datetime="0h 1m 0s" class="item__eta">ETA: 1min</time>
-					<span class="item__price">$5.00</span>
-				</article>
-			`;
-			list.push(article);
-		}
+		if (!this.props) return '<p class="message--success">Loading...</p>';
 
-		return list;
+		const { pizzas } = this.props;
+		console.log('pizzas: ', pizzas);
+
+		return pizzas.reduce((html, pizza, i) => {
+			const eta = (new Date(pizza.time_prepared) - Date.now()) / 60000;
+
+			return html += `
+				<article class="list__item">
+					<img src="${API_SERVICE.DOMAIN}/${pizza.img_url}" alt="" class="item__pic" crossOrigin>
+					<time class="item__order-time">${getTime(new Date(pizza.created_date))}</time >
+					<h3 class="item__number-in-queue">#${pizzas.length - i}</h3>
+					<time datetime="0h 1m 0s" class="item__eta">ETA:
+						${Math.floor(eta)} min
+					</time>
+					<span class="item__price">$${pizza.price.toFixed(2)}</span>
+				</article >
+			`;
+		}, '');
 	}
 }
