@@ -95,14 +95,28 @@ export default class CreatePizza extends Component {
 
 		const formData = new FormData(this.form);
 
-		const tags = formData.getAll('tag').map(Number);
-		const ingredients = formData.getAll('ingredient').map(Number);
+		let tags = [];
+		let ingredients = [];
+
+		if (formData.getAll) {
+			tags = formData.getAll('tag').map(Number);
+			ingredients = formData.getAll('ingredient').map(Number);
+
+			formData.delete('tag');
+			formData.delete('ingredient');
+		} else {
+			// browser does not support FormData.getAll() method
+			this.tagsInputs.forEach(input => {
+				if (input.checked) tags.push(+input.value);
+			});
+
+			this.ingredientInputs.forEach(input => {
+				if (input.checked) ingredients.push(+input.value);
+			});
+		}
 
 		formData.append('tags', JSON.stringify(tags));
 		formData.append('ingredients', JSON.stringify(ingredients));
-
-		formData.delete('tag');
-		formData.delete('ingredient');
 
 		this.props.onSubmit(formData);
 	}
@@ -171,7 +185,8 @@ export default class CreatePizza extends Component {
 				return html += `
 					<label class="create-pizza__checkbox-label">
 						<input class="create-pizza__checkbox" type="checkbox"
-							name="tag" value="${tag.id}">
+							name="tag" value="${tag.id}"
+							data-tag>
 						<span class="create-pizza__checkbox-span">
 							${tag.name}
 						</span>
@@ -203,6 +218,7 @@ export default class CreatePizza extends Component {
 
 		this.form = form.getElementById('create-pizza__form');
 		this.ingredientInputs = form.querySelectorAll('[data-ingredient]');
+		this.tagsInputs = form.querySelectorAll('[data-tag]');
 		this.sizeInputs = form.querySelectorAll('[data-size]');
 
 		form.getElementById('total').append(this.total.update());
