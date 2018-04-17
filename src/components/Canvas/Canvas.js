@@ -21,7 +21,7 @@ export default class CreatePizza extends Component {
 		this.canvas.height = 320;
 
 		const { maxNumberOfIngredients } = PIZZA_SERVICE;
-		this.cellularMap = new CellularMap(250, 20, maxNumberOfIngredients, 5);
+		this.cellularMap = new CellularMap(255, 20, maxNumberOfIngredients, 5);
 
 		this.offsetX = (this.canvas.width - this.cellularMap.diameter) / 2;
 		this.offsetY = (this.canvas.height - this.cellularMap.diameter) / 2;
@@ -50,7 +50,8 @@ export default class CreatePizza extends Component {
 				PIZZA_SERVICE.images[cell.ingredient],
 				cell.x + this.offsetX,
 				cell.y + this.offsetY,
-				15, 15
+				17, 17,
+				cell.angle
 			);
 			sprite.draw(this.ctx);
 		});

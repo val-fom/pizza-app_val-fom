@@ -1,4 +1,4 @@
-import { getRandomInt } from ".";
+import { getRandomInt, getRandomFloat } from ".";
 
 export class CellularMap {
 	constructor(diameter, cellSize, maxNumberOfIngredients, amplitude) {
@@ -32,6 +32,7 @@ export class CellularMap {
 					y: Math.round(y),
 					ingredient: null,
 					hidden: false,
+					angle: getRandomFloat(0, 2 * Math.PI),
 				});
 				x += 2 * this.dx;
 			}

@@ -48,6 +48,10 @@ export const getRandomInt = (min, max) => {
 	return Math.floor(Math.random() * (max - min)) + min;
 };
 
+export const getRandomFloat = (min, max) => {
+	return Math.random() * (max - min) + min;
+};
+
 export const getCanvasAsFile = canvas => {
 	return new Promise((resolve, reject) => {
 		canvas.toBlob(blob => {
