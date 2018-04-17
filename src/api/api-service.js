@@ -14,6 +14,7 @@ class ApiService {
 			ingredientList: '/ingredient/list',
 			tagList: '/tag/list',
 			pizzaCreate: '/pizza/create',
+			pizzaList: '/pizza/list	',
 		};
 	}
 
@@ -25,6 +26,10 @@ class ApiService {
 		return this.get(this.END_POINTS.userInfo, AUTH_SERVICE.token);
 	}
 
+	getPizzas() {
+		return this.get(this.END_POINTS.pizzaList, AUTH_SERVICE.token);
+	}
+
 	getIngredientList() {
 		return this.get(this.END_POINTS.ingredientList, AUTH_SERVICE.token);
 	}
@@ -34,26 +39,17 @@ class ApiService {
 	}
 
 	createPizza(pizzaData) {
-		const headers = new Headers();
-		headers.append('content-type', 'multipart/formdata');
-		headers.append('Authorization', `Bearer ${AUTH_SERVICE.token}`);
-
-		return fetch(this.BASE_API_URL + this.END_POINTS.userCreate, {
-			method: 'POST',
-			body: pizzaData,
-			headers,
-		})
-			.then(status)
-			.then(json)
-			.catch(console.error);
+		return this.post(this.END_POINTS.pizzaCreate, pizzaData, AUTH_SERVICE.token);
 	}
 
 	loginUser(credentials) {
-		return this.post(this.END_POINTS.userLogin, credentials);
+		return this.post(this.END_POINTS.userLogin,
+			JSON.stringify(credentials));
 	}
 
 	createUser(userData) {
-		return this.post(this.END_POINTS.userCreate, userData);
+		return this.post(this.END_POINTS.userCreate,
+			JSON.stringify(userData));
 	}
 
 	get(endpoint, token) {
@@ -66,27 +62,24 @@ class ApiService {
 		return fetch(this.BASE_API_URL + endpoint, { headers })
 			.then(status)
 			.then(json)
-			.then(response => {
-				if (response.error === 'Wrong authorization data') {
-					// the token is not expired, but is invalid
-					// it looks like someone logged in with another browser
-					window.location.hash = '/logout';
-					throw new Error(response.error);
-				} else {
-					return response;
-				}
-			})
 			.catch(console.error);
 	}
 
-	post(endpoint, payload) {
+	post(endpoint, payload, token) {
+		const headers = new Headers();
+
+		if (token) {
+			headers.append('Authorization', `Bearer ${token}`);
+		}
+
 		return fetch(this.BASE_API_URL + endpoint, {
 			method: 'POST',
-			body: JSON.stringify(payload),
-			headers: new Headers({ 'content-type': 'application/json' }),
+			body: payload,
+			headers,
 		})
 			.then(status)
-			.then(json);
+			.then(json)
+			.catch(console.error);
 	}
 }
 

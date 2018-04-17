@@ -1,5 +1,6 @@
 import { parseHTML } from './utils';
 import { Component } from './framework';
+import { API_SERVICE } from './api';
 
 import Header from './components/Header';
 import List from './components/List';
@@ -18,6 +19,15 @@ export default class App extends Component {
 
 		this.main = document.createElement('main');
 		this.main.classList.add('main');
+
+		this.getPizzas();
+	}
+
+	getPizzas() {
+		return API_SERVICE.getPizzas()
+			.then(pizzas => {
+				this.list.update({ pizzas: pizzas.results });
+			});
 	}
 
 	render() {

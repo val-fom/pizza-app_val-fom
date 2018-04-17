@@ -1,5 +1,4 @@
-export const getTime = () => {
-	const now = new Date();
+export const getTime = (now = new Date()) => {
 	const ss = now.getSeconds().toString().padStart(2, '0');
 	const mm = now.getMinutes().toString().padStart(2, '0');
 	const hh = now.getHours().toString().padStart(2, '0');
@@ -46,6 +45,10 @@ export const parseJwtClaims = jwtToken => {
 
 export const getRandomInt = (min, max) => {
 	return Math.floor(Math.random() * (max - min)) + min;
+};
+
+export const getRandomFloat = (min, max) => {
+	return Math.random() * (max - min) + min;
 };
 
 export const getCanvasAsFile = canvas => {
