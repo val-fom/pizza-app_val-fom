@@ -7,6 +7,8 @@ import Canvas from './components/Canvas';
 import CreatePizza from './components/CreatePizza';
 import Footer from './components/Footer';
 
+import Message from './components/Message';
+
 export default class Create extends Component {
 	constructor(props) {
 		super(props);
@@ -18,6 +20,8 @@ export default class Create extends Component {
 		this.canvas = new Canvas();
 		this.createPizza = new CreatePizza();
 		this.footer = new Footer();
+
+		this.message = new Message();
 
 		this.main = document.createElement('main');
 		this.main.classList.add('main', 'main--create');
@@ -40,33 +44,22 @@ export default class Create extends Component {
 		getCanvasAsFile(canvas)
 			.then(blob => {
 				formData.append('image', blob);
-				return formData;
+				return API_SERVICE.createPizza(formData);
 			})
-			// .then(formData => {
-			// 	for (var pair of formData.entries()) {
-			// 		console.log(pair[0] + ': ' + pair[1]);
-			// 	}
-			// 	return formData;
-			// })
-			.then(formData => {
-				API_SERVICE.createPizza(formData);
-			});
-
-		// return API_SERVICE.createPizza(pizzaData)
-		// 	.then(response => {
-		// 		if (response.success) {
-		// 			this.message.update({ response });
-		// 			// redirect to '/login'
-		// 			setTimeout(() => {
-		// 				window.location.hash = '/login';
-		// 			}, 1000);
-		// 			// TODO: employ callback here. Like so:
-		// 			// this.props.onSuccess();
-		// 		} else {
-		// 			this.message.update({ response });
-		// 		}
-		// 	})
-		// 	.catch(console.error);
+			.then(response => {
+				if (response.success) {
+					this.message.update({ response });
+					// redirect to '/login'
+					setTimeout(() => {
+						window.location.hash = '/';
+					}, 1000);
+					// TODO: employ callback here. Like so:
+					// this.props.onSuccess();
+				} else {
+					this.message.update({ response });
+				}
+			})
+			.catch(console.error);
 	}
 
 	beforeUpdate() {
@@ -88,7 +81,7 @@ export default class Create extends Component {
 	render() {
 		const heading = `
 			<h2 class="main__heading">Create and order your pizza!</h2>
-		`;
+			`;
 
 		this.main.append(
 			parseHTML(heading)
@@ -97,6 +90,7 @@ export default class Create extends Component {
 		return [
 			this.header.update(),
 			this.main,
+			this.message.update(),
 			this.footer.update(),
 		];
 	}

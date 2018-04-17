@@ -24,7 +24,6 @@ export default class CreatePizza extends Component {
 		this.host.addEventListener('submit', this.handleSubmit);
 
 		this.total = new Total();
-		// this.message = new Message();
 	}
 
 	shadeIngredients() {
@@ -208,9 +207,6 @@ export default class CreatePizza extends Component {
 
 		form.getElementById('total').append(this.total.update());
 
-		return [
-			form,
-			// this.message.update(),
-		];
+		return form;
 	}
 }
