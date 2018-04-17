@@ -71,16 +71,6 @@ class ApiService {
 		return fetch(this.BASE_API_URL + endpoint, { headers })
 			.then(status)
 			.then(json)
-			.then(response => {
-				if (response.error === 'Wrong authorization data') {
-					// the token is not expired, but is invalid
-					// it looks like someone logged in with another browser
-					window.location.hash = '/logout';
-					throw new Error(response.error);
-				} else {
-					return response;
-				}
-			})
 			.catch(console.error);
 	}
 
