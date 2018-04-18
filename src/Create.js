@@ -49,7 +49,7 @@ export default class Create extends Component {
 			.then(response => {
 				if (response.success) {
 					this.message.update({ response });
-					// redirect to '/login'
+					// redirect to '/'
 					setTimeout(() => {
 						window.location.hash = '/';
 					}, 1000);

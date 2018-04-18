@@ -53,8 +53,6 @@ export const getRandomFloat = (min, max) => {
 
 export const getCanvasAsFile = canvas => {
 	return new Promise((resolve, reject) => {
-		canvas.toBlob(blob => {
-			resolve(blob);
-		});
+		canvas.toBlob(resolve);
 	});
 };
