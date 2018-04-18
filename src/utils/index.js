@@ -30,7 +30,7 @@ export const insertChildren = (parent, children) => {
 };
 
 export const status = res => {
-	if (res.ok || res.status === 400 || res.status === 403) return res;
+	if (res.ok || res.status === 400) return res;
 	console.log('response:', res);
 	throw new Error(res.statusText);
 };
@@ -53,8 +53,6 @@ export const getRandomFloat = (min, max) => {
 
 export const getCanvasAsFile = canvas => {
 	return new Promise((resolve, reject) => {
-		canvas.toBlob(blob => {
-			resolve(blob);
-		});
+		canvas.toBlob(resolve);
 	});
 };

@@ -37,7 +37,7 @@ class AuthService {
 
 	tokenIsNotExpired() {
 		if (!this.token) return false;
-		return this.claims.exp < Date.now();
+		return this.claims.exp > Date.now() / 1000;
 	}
 
 	logout() {
