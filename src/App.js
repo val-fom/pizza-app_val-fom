@@ -19,15 +19,6 @@ export default class App extends Component {
 
 		this.main = document.createElement('main');
 		this.main.classList.add('main');
-
-		this.getPizzas();
-	}
-
-	getPizzas() {
-		return API_SERVICE.getPizzas()
-			.then(pizzas => {
-				this.list.update({ pizzas: pizzas.results });
-			});
 	}
 
 	render() {
