@@ -5,6 +5,7 @@ import Header from '../components/Header';
 class ApiService {
 	constructor() {
 		this.DOMAIN = 'https://pizza-tele.ga';
+		this.WS_PATH = 'wss://pizza-tele.ga/ws';
 		this.BASE_API_URL = this.DOMAIN + '/api/v1';
 		this.END_POINTS = {
 			storeList: '/store/list',
@@ -14,8 +15,13 @@ class ApiService {
 			ingredientList: '/ingredient/list',
 			tagList: '/tag/list',
 			pizzaCreate: '/pizza/create',
-			pizzaList: '/pizza/list	',
+			pizzaList: '/pizza/list',
+			getTicket: '/ws/ticket',
 		};
+	}
+
+	getTicket() {
+		return this.get(this.END_POINTS.getTicket, AUTH_SERVICE.token);
 	}
 
 	getStoreList() {
