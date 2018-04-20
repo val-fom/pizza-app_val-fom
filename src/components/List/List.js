@@ -18,16 +18,23 @@ export default class List extends Component {
 
 		if (!WS_SERVICE.isOpen) WS_SERVICE.establish();
 
-		WS_SERVICE.subscribe('CREATE_PIZZA', data => this.addPizza(data));
-		WS_SERVICE.subscribe('ACCEPT_PIZZA', data => this.removePizzas(data));
-		// TODO: problem: this^ produces many identical functions for each event
+		this.unsubAdd = WS_SERVICE.subscribe('CREATE_PIZZA', data =>
+			this.addPizza(data));
+		this.unsubRemove = WS_SERVICE.subscribe('ACCEPT_PIZZA', data =>
+			this.removePizzas(data));
+	}
+
+	beforeUnmount() {
+		this.unsubAdd();
+		this.unsubRemove();
 	}
 
 	addPizza(newPizza) {
 		let { pizzas } = this.state;
+
 		pizzas = pizzas.concat(newPizza);
 		this.updateState({ pizzas });
-		console.log(this.state);
+		console.log('ADD:', newPizza);
 	}
 
 	removePizzas(uuids) {

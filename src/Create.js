@@ -50,9 +50,9 @@ export default class Create extends Component {
 				if (response.success) {
 					this.message.update({ response });
 					// redirect to '/'
-					// setTimeout(() => {
-					// 	window.location.hash = '/';
-					// }, 1000);
+					setTimeout(() => {
+						window.location.hash = '/';
+					}, 1000);
 					// TODO: employ callback here. Like so:
 					// this.props.onSuccess();
 				} else {

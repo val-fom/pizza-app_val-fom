@@ -26,14 +26,14 @@ class WsService {
 	}
 
 	subscribe(eventName, callBack) {
-		this._emitter.subscribe(eventName, callBack);
+		return this._emitter.subscribe(eventName, callBack);
 	}
 
 	establish() {
 		this._shakeHand()
 			.then(ticket => {
 				this.ws = new WebSocket(`${API_SERVICE.WS_PATH}?key=${ticket}`);
-				this.ws.onopen = console.log;
+				this.ws.onopen = () => console.log('WS OPENED');
 				this.ws.onmessage = ev => this._onmessage(ev.data);
 				this.ws.onclose = this._onclose;
 			});
