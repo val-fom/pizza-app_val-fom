@@ -21,6 +21,10 @@ export default class App extends Component {
 		this.main.classList.add('main');
 	}
 
+	beforeUnmount() {
+		this.list.unmount();
+	}
+
 	render() {
 		const button = `
 			<a href="#/create" class="button main__button">

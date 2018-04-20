@@ -62,8 +62,13 @@ export default class Router extends Component {
 
 	applyRoute(route, url) {
 		const { Component } = route;
+		const { activeComponent } = this.state;
 
 		const componentsInstance = new Component();
+
+		if (activeComponent) {
+			activeComponent.unmount();
+		}
 
 		this.updateState({
 			activeRoute: route,
