@@ -17,9 +17,6 @@
 	background: rgba(255, 255, 255, 0.5);
 	border-radius: 1rem;
 	padding: 1rem;
-	:nth-child(odd) {
-		text-align: right;
-	}
 	transition: $transition;
 	&:hover {
 		background: $color-transparent;
@@ -33,8 +30,13 @@
 	grid-column: 1 / 3;
 }
 
+.item__number-in-queue {
+	text-align: right;
+}
+
 .item__price {
 	font-weight: bold;
+	text-align: right;
 }
 
 .list__button {

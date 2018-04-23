@@ -1,7 +1,9 @@
 import './list.scss';
 import { Component } from '../../framework';
 import { API_SERVICE, WS_SERVICE } from '../../api';
-import { getTime } from "../../utils";
+import { getTime, parseHTML } from "../../utils";
+
+import Timer from '../Timer';
 
 export default class List extends Component {
 	constructor(props) {
@@ -56,6 +58,7 @@ export default class List extends Component {
 	getPizzas() {
 		return API_SERVICE.getPizzas()
 			.then(pizzas => {
+				console.log('pizzas: ', pizzas);
 				this.updateState({ pizzas: pizzas.results });
 			});
 	}
@@ -74,17 +77,10 @@ export default class List extends Component {
 			</p>
 		`;
 
-		return pizzas.reduce((html, pizza, i) => {
-			let eta = Math.floor((new Date(pizza.time_prepared) -
-				Date.now()) / 60000);
+		return pizzas.map((pizza, i) => {
+			const eta = new Timer({ timePrepared: pizza.time_prepared });
 
-			if (eta < 0) {
-				eta = 'ready';
-			} else {
-				eta += ' min';
-			}
-
-			return html += `
+			const html = `
 				<article class="list__item">
 					<img
 						src="${API_SERVICE.DOMAIN}/${pizza.img_url}" 
@@ -98,16 +94,17 @@ export default class List extends Component {
 					<h3 class="item__number-in-queue">
 						#${i + 1}
 					</h3>
-					<time
-						datetime="PT${Math.floor(eta)}M"
-						class="item__eta">
-							ETA: ${eta}
-					</time>
+					<div id="timer"></div>
 					<span class="item__price">
 						$${pizza.price.toFixed(2)}
 					</span>
 				</article>
 			`;
-		}, '');
+
+			const fragment = parseHTML(html);
+			fragment.getElementById('timer').append(eta.update());
+
+			return fragment;
+		});
 	}
 }
