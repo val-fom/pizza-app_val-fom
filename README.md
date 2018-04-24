@@ -13,6 +13,11 @@
 * [x] [/logout](https://kottans-frontend-2018.github.io/pizza-app_val-fom/dist/#/logout) (will log you out `onEnter`!)
 * [x] [/create](https://kottans-frontend-2018.github.io/pizza-app_val-fom/dist/#/create) (authorization required)
 
+### To test the app you can take following credentials:
+
+* login: `guest`
+* password: `guestpizza`
+
 ### Screenshots:
 
 ##### `/create` page

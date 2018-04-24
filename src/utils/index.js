@@ -56,3 +56,9 @@ export const getCanvasAsFile = canvas => {
 		canvas.toBlob(resolve);
 	});
 };
+
+export const getMinutesLeft = time => {
+	time = new Date(time);
+	const minutesLeft = (time - Date.now()) / 1000 / 60;
+	return minutesLeft;
+};
