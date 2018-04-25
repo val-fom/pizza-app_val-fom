@@ -23,7 +23,7 @@ export default class UserInfo extends Component {
 				</tbody>
 			</table>
 			<div class="user-info__button-wrapper">
-				<a href="#/" class="button user-info__button">Pizza List</a>
+				<a href="#/list" class="button user-info__button">Pizza List</a>
 				<a href="#/logout" 
 					class="button user-info__button button--red">
 					Log out

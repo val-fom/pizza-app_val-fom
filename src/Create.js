@@ -49,9 +49,9 @@ export default class Create extends Component {
 			.then(response => {
 				if (response.success) {
 					this.message.update({ response });
-					// redirect to '/'
+					// redirect to '/list'
 					setTimeout(() => {
-						window.location.hash = '/';
+						window.location.hash = '/list';
 					}, 1000);
 					// TODO: employ callback here. Like so:
 					// this.props.onSuccess();

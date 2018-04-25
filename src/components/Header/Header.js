@@ -22,7 +22,7 @@ export default class Header extends Component {
 				<div class="header__time" id="time">
 				</div>
 				<div class="header__logo">
-					<a href="#/">
+					<a href="#/list">
 						<img class="logo__img" src="img/pizza-logo.png"
 							alt="Pizza app logo">
 					</a>

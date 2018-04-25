@@ -200,7 +200,7 @@ export default class CreatePizza extends Component {
 	
 		<div class="create-pizza__button-wrapper">
 			<a 
-				href="#/"
+				href="#/list"
 				class="button create-pizza__button 
 					create-pizza__button--reset" 
 			>Cancel</a>

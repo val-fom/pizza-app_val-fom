@@ -6,14 +6,14 @@
 
 ### Routes:
 
-* [x] [/](https://kottans-frontend-2018.github.io/pizza-app_val-fom/dist/#/) (authorization required)
+* [x] [/list](https://kottans-frontend-2018.github.io/pizza-app_val-fom/dist/#/list) (authorization required)
 * [x] [/login](https://kottans-frontend-2018.github.io/pizza-app_val-fom/dist/#/login)
 * [x] [/register](https://kottans-frontend-2018.github.io/pizza-app_val-fom/dist/#/register)
 * [x] [/user](https://kottans-frontend-2018.github.io/pizza-app_val-fom/dist/#/user) (authorization required)
 * [x] [/logout](https://kottans-frontend-2018.github.io/pizza-app_val-fom/dist/#/logout) (will log you out `onEnter`!)
 * [x] [/create](https://kottans-frontend-2018.github.io/pizza-app_val-fom/dist/#/create) (authorization required)
 
-### To test the app you can take following credentials:
+### To try the app you can take following credentials:
 
 * login: `guest`
 * password: `guestpizza`
