@@ -14,10 +14,14 @@ export default class Timer extends Component {
 		this.host = document.createElement('div');
 		this.host.classList.add('timer__container');
 
-		setInterval(() => {
+		this.timerId = setInterval(() => {
 			const eta = getMinutesLeft(this.state.timePrepared);
 			this.updateState({ eta });
 		}, 5000);
+	}
+
+	beforeUnmount() {
+		clearInterval(this.timerId);
 	}
 
 	render() {

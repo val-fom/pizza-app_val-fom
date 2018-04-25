@@ -24,11 +24,14 @@ export default class List extends Component {
 			this.addPizza(data));
 		this.unsubRemove = WS_SERVICE.subscribe('ACCEPT_PIZZA', data =>
 			this.removePizzas(data));
+
+		this.timers = new Map();
 	}
 
 	beforeUnmount() {
 		this.unsubAdd();
 		this.unsubRemove();
+		this.timers.forEach(timer => timer.unmount());
 	}
 
 	addPizza(newPizza) {
@@ -49,6 +52,7 @@ export default class List extends Component {
 			if (~index) {
 				console.log('DELETE:', pizzas[index]);
 				pizzas.splice(index, 1);
+				this.timers.get(uuid).unmount();
 			}
 		});
 
@@ -78,7 +82,11 @@ export default class List extends Component {
 		`;
 
 		return pizzas.map((pizza, i) => {
-			const eta = new Timer({ timePrepared: pizza.time_prepared });
+			const timer = new Timer({
+				timePrepared: pizza.time_prepared,
+			});
+
+			this.timers.set(pizza.uuid, timer);
 
 			const html = `
 				<article class="list__item">
@@ -102,7 +110,7 @@ export default class List extends Component {
 			`;
 
 			const fragment = parseHTML(html);
-			fragment.getElementById('timer').append(eta.update());
+			fragment.getElementById('timer').append(timer.update());
 
 			return fragment;
 		});
