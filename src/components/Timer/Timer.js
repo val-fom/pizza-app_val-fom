@@ -31,7 +31,7 @@ export default class Timer extends Component {
 			`<span class="item__eta eta--ready">ready</span>`
 			:
 			`<time datetime="PT${Math.round(eta)}M" class="item__eta">
-				ETA: ${Math.round(eta)} min
+				ETA: ${Math.floor(eta)} min
 			</time>`;
 	}
 }
