@@ -32,8 +32,9 @@ class ApiService {
 		return this.get(this.END_POINTS.userInfo, AUTH_SERVICE.token);
 	}
 
-	getPizzas() {
-		return this.get(this.END_POINTS.pizzaList, AUTH_SERVICE.token);
+	getPizzas(limit, offset) {
+		return this.get(this.END_POINTS.pizzaList +
+			`?limit=${limit || 100}&offset=${offset || 0}`, AUTH_SERVICE.token);
 	}
 
 	getIngredientList() {

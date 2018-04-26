@@ -16,8 +16,6 @@ export default class List extends Component {
 		this.host = document.createElement('div');
 		this.host.classList.add('list__container');
 
-		this.getPizzas();
-
 		if (!WS_SERVICE.isOpen) WS_SERVICE.establish();
 
 		this.unsubAdd = WS_SERVICE.subscribe('CREATE_PIZZA', data =>
@@ -60,16 +58,17 @@ export default class List extends Component {
 		this.updateState({ pizzas });
 	}
 
-	getPizzas() {
-		return API_SERVICE.getPizzas()
-			.then(pizzas => {
-				console.log('pizzas: ', pizzas);
-				this.updateState({ pizzas: pizzas.results });
-			});
-	}
+	// getPizzas() {
+	// 	return API_SERVICE.getPizzas()
+	// 		.then(pizzas => {
+	// 			console.log('pizzas: ', pizzas);
+	// 			this.updateState({ pizzas: pizzas.results });
+	// 		});
+	// }
 
 	render() {
-		const { pizzas } = this.state;
+		const { pizzas } = this.props;
+		console.log('pizzas: ', pizzas);
 
 		if (!pizzas) return `
 			<p class="message--success">
