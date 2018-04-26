@@ -9,10 +9,10 @@ import User from './User';
 export default [
 	{
 		href: '',
-		redirectTo: '/',
+		redirectTo: '/list',
 	},
 	{
-		href: '/',
+		href: '/list',
 		Component: App,
 		canActivate: AUTH_SERVICE.isAuthorized,
 	},
@@ -38,7 +38,7 @@ export default [
 		href: '/logout',
 		onEnter(redirect) {
 			AUTH_SERVICE.logout();
-			redirect('/');
+			redirect('/list');
 		}
 	}
 ];

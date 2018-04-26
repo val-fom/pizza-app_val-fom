@@ -14,10 +14,14 @@ export default class Timer extends Component {
 		this.host = document.createElement('div');
 		this.host.classList.add('timer__container');
 
-		setInterval(() => {
+		this.timerId = setInterval(() => {
 			const eta = getMinutesLeft(this.state.timePrepared);
 			this.updateState({ eta });
 		}, 5000);
+	}
+
+	beforeUnmount() {
+		clearInterval(this.timerId);
 	}
 
 	render() {
@@ -27,7 +31,7 @@ export default class Timer extends Component {
 			`<span class="item__eta eta--ready">ready</span>`
 			:
 			`<time datetime="PT${Math.round(eta)}M" class="item__eta">
-				ETA: ${Math.round(eta)} min
+				ETA: ${Math.floor(eta)} min
 			</time>`;
 	}
 }

@@ -200,7 +200,7 @@ export default class CreatePizza extends Component {
 	
 		<div class="create-pizza__button-wrapper">
 			<a 
-				href="#/"
+				href="#/list"
 				class="button create-pizza__button 
 					create-pizza__button--reset" 
 			>Cancel</a>
@@ -221,7 +221,11 @@ export default class CreatePizza extends Component {
 		this.tagsInputs = form.querySelectorAll('[data-tag]');
 		this.sizeInputs = form.querySelectorAll('[data-size]');
 
-		form.getElementById('total').append(this.total.update());
+		form.getElementById('total').append(this.total.update({
+			ingredients: [],
+			checkedIngredients: [],
+			size: 60,
+		}));
 
 		return form;
 	}
