@@ -32,6 +32,7 @@ export default class List extends Component {
 		this.unsubAdd();
 		this.unsubRemove();
 		this.timers.forEach(timer => timer.unmount());
+		WS_SERVICE.close();
 	}
 
 	addPizza(newPizza) {

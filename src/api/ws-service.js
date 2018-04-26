@@ -41,6 +41,12 @@ class WsService {
 			});
 	}
 
+	close() {
+		this.ws.onclose = () => { };
+		this.ws.close();
+		console.log('WS CLOSED');
+	}
+
 	_shakeHand() {
 		return API_SERVICE.getTicket()
 			.then(response => {
