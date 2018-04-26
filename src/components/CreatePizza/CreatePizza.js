@@ -221,7 +221,11 @@ export default class CreatePizza extends Component {
 		this.tagsInputs = form.querySelectorAll('[data-tag]');
 		this.sizeInputs = form.querySelectorAll('[data-size]');
 
-		form.getElementById('total').append(this.total.update());
+		form.getElementById('total').append(this.total.update({
+			ingredients: [],
+			checkedIngredients: [],
+			size: 60,
+		}));
 
 		return form;
 	}
