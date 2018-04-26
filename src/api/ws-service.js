@@ -5,6 +5,8 @@ class WsService {
 	constructor() {
 		this.ws = null;
 		this._emitter = new EventEmitter();
+
+		this._onclose = this._onclose.bind(this);
 	}
 
 	get isOpen() {
@@ -21,7 +23,7 @@ class WsService {
 			alert('Unauthorised');
 		} else {
 			console.log('Lost connection reconnect');
-			setTimeout(this.establish, 2000);
+			setTimeout(() => this.establish(), 2000);
 		}
 	}
 
